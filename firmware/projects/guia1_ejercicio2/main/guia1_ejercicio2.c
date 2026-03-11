@@ -23,7 +23,7 @@
 #include "led.h"
 #include "switch.h"
 /*==================[macros and definitions]=================================*/
-#define CONFIG_BLINK_PERIOD 100
+#define CONFIG_BLINK_PERIOD 1000
 /*==================[internal data definition]===============================*/
 
 /*==================[internal functions declaration]=========================*/
