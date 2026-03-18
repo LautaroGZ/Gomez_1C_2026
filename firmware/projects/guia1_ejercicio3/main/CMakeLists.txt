@@ -1,2 +1,2 @@
-idf_component_register(SRCS "x_template.c"
+idf_component_register(SRCS "guia1_ejercicio3.c"
                     INCLUDE_DIRS "")
