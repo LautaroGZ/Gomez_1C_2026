@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Código para manejar un display BCD mediante una placa ESP32C6: C:/Users/zieli/Desktop/Facultad/Electronica_Programable/Repositorio/Gomez_1C_2026/firmware/projects/guia1_ejercicio6/main/guia1_ejercicio6.c</title>
+<link rel="icon" href="icon.ico" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fiuner.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">Código para manejar un display BCD mediante una placa ESP32C6<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Este programa implementa la multiplexación de un display de 7 segmentos</div>
+  </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('_c_1_2_users_2zieli_2_desktop_2_facultad_2_electronica__programable_2_repositorio_2_gomez_1_c_20dae8d007bacb9761830a98c59c4cbe10.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">C:/Users/zieli/Desktop/Facultad/Electronica_Programable/Repositorio/Gomez_1C_2026/firmware/projects/guia1_ejercicio6/main/guia1_ejercicio6.c</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a id="_a0" name="_a0"></a><a class="code hl_struct" href="structgpio_conf__t.html">gpioConf_t</a> pin_config = {<a id="_a1" name="_a1"></a><a class="code hl_enumvalue" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a081be372da926e3ca6f612b267854e95">GPIO_20</a>, <a id="_a2" name="_a2"></a><a class="code hl_enumvalue" href="group___g_i_o_p.html#gga423620ef7d69894833f70cfc395caaa9aa248e73c1faee9c6f072fd91569cf516">GPIO_OUTPUT</a>};</div>
+<div class="line"><a id="a3" name="a3"></a><a class="code hl_function" href="group___g_i_o_p.html#ga10240d283f64bd1b09fca664fda27964">GPIOInit</a>(pin_config.<a id="a4" name="a4"></a><a class="code hl_variable" href="structgpio_conf__t.html#aca3d4c5920a3f389dfded4a9726473a9">pin</a>, pin_config.<a id="a5" name="a5"></a><a class="code hl_variable" href="structgpio_conf__t.html#a8f9801ec3144d1e53252a902330c58a1">dir</a>);</div>
+<div class="ttc" id="agroup___g_i_o_p_html_ga10240d283f64bd1b09fca664fda27964"><div class="ttname"><a href="group___g_i_o_p.html#ga10240d283f64bd1b09fca664fda27964">GPIOInit</a></div><div class="ttdeci">void GPIOInit(gpio_t pin, io_t io)</div><div class="ttdoc">GPIO initialization.</div><div class="ttdef"><b>Definition</b> <a href="gpio__mcu_8c_source.html#l00067">gpio_mcu.c:67</a></div></div>
+<div class="ttc" id="agroup___g_i_o_p_html_gga423620ef7d69894833f70cfc395caaa9aa248e73c1faee9c6f072fd91569cf516"><div class="ttname"><a href="group___g_i_o_p.html#gga423620ef7d69894833f70cfc395caaa9aa248e73c1faee9c6f072fd91569cf516">GPIO_OUTPUT</a></div><div class="ttdeci">@ GPIO_OUTPUT</div><div class="ttdef"><b>Definition</b> <a href="gpio__mcu_8h_source.html#l00044">gpio_mcu.h:44</a></div></div>
+<div class="ttc" id="agroup___g_i_o_p_html_ggaf65604147d0244c9b13cfdc865ad5393a081be372da926e3ca6f612b267854e95"><div class="ttname"><a href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a081be372da926e3ca6f612b267854e95">GPIO_20</a></div><div class="ttdeci">@ GPIO_20</div><div class="ttdef"><b>Definition</b> <a href="gpio__mcu_8h_source.html#l00072">gpio_mcu.h:72</a></div></div>
+<div class="ttc" id="astructgpio_conf__t_html"><div class="ttname"><a href="structgpio_conf__t.html">gpioConf_t</a></div><div class="ttdoc">Estructura de configuración para los pines GPIO.</div><div class="ttdef"><b>Definition</b> <a href="guia1__ejercicio6_8c_source.html#l00115">guia1_ejercicio6.c:115</a></div></div>
+<div class="ttc" id="astructgpio_conf__t_html_a8f9801ec3144d1e53252a902330c58a1"><div class="ttname"><a href="structgpio_conf__t.html#a8f9801ec3144d1e53252a902330c58a1">gpioConf_t::dir</a></div><div class="ttdeci">io_t dir</div><div class="ttdef"><b>Definition</b> <a href="guia1__ejercicio6_8c_source.html#l00117">guia1_ejercicio6.c:117</a></div></div>
+<div class="ttc" id="astructgpio_conf__t_html_aca3d4c5920a3f389dfded4a9726473a9"><div class="ttname"><a href="structgpio_conf__t.html#aca3d4c5920a3f389dfded4a9726473a9">gpioConf_t::pin</a></div><div class="ttdeci">gpio_t pin</div><div class="ttdef"><b>Definition</b> <a href="guia1__ejercicio6_8c_source.html#l00116">guia1_ejercicio6.c:116</a></div></div>
+</div><!-- fragment --><div class="fragment"><div class="line"></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">/*==================[inclusions]=============================================*/</span></div>
+<div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="gpio__mcu_8h.html">gpio_mcu.h</a>&quot;</span></div>
+<div class="line"></div>
+<div class="line"><span class="preprocessor">#include &quot;freertos/FreeRTOS.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;freertos/task.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">/*==================[macros and definitions]=================================*/</span></div>
+<div class="line"></div>
+<div class="line"><span class="preprocessor">#define DISPLAY_DIGITS 3</span></div>
+<div class="line"></div>
+<div class="line"><span class="preprocessor">#define BCD_BITS 4</span></div>
+<div class="line"></div>
+<div class="line"><span class="preprocessor">#define DISPLAY_MULTIPLEX_DELAY_MS 5</span></div>
+<div class="line"></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">/*==================[internal data definition]===============================*/</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">/*==================[internal functions declaration]=========================*/</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">/*==================[external functions definition]==========================*/</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">/*==================[Estructura GPIO]=======================================*/</span></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line">    <a id="_a6" name="_a6"></a><a class="code hl_typedef" href="group___g_i_o_p.html#gac6f7bd4f7ee306a4519f04641cbf2d67">gpio_t</a> pin; </div>
+<div class="line">    <a id="_a7" name="_a7"></a><a class="code hl_enumeration" href="group___g_i_o_p.html#ga423620ef7d69894833f70cfc395caaa9">io_t</a> dir;   </div>
+<div class="line">} <a class="code hl_struct" href="structgpio_conf__t.html">gpioConf_t</a>;</div>
+<div class="line"></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">/*==================[PUNTO 4]==============================================*/</span></div>
+<div class="line"></div>
+<div class="line">int8_t <a id="a8" name="a8"></a><a class="code hl_function" href="group___conversion_functions.html#ga52ee2e8838ceab35f8bdc0f4e58a0dac">convertToBcdArray</a>(uint32_t data, uint8_t digits, uint8_t *bcd_number)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">if</span> (bcd_number == <a id="_a9" name="_a9"></a><a class="code hl_define" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>) <span class="keywordflow">return</span> -1;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Lleno desde el final para mantener orden correcto</span></div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = digits - 1; i &gt;= 0; i--) {</div>
+<div class="line">        bcd_number[i] = data % 10;  <span class="comment">// obtengo último dígito</span></div>
+<div class="line">        data = data / 10;           <span class="comment">// elimino ese dígito</span></div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">/*==================[PUNTO 5]==============================================*/</span></div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> <a id="a10" name="a10"></a><a class="code hl_function" href="group___output_functions.html#ga4718aaf339c1e2d15dad917bdf22182c">bcdToGpio</a>(uint8_t bcd, <a class="code hl_struct" href="structgpio_conf__t.html">gpioConf_t</a> *vec)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++) {</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// Extraigo el bit i del número</span></div>
+<div class="line">        uint8_t bit = (bcd &gt;&gt; i) &amp; 0x01;</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// Escribo ese bit en el GPIO correspondiente</span></div>
+<div class="line">        <span class="keywordflow">if</span> (bit) {</div>
+<div class="line">            <a id="a11" name="a11"></a><a class="code hl_function" href="group___g_i_o_p.html#gaff44adf38b055e964fe7e89834eabccc">GPIOState</a>(vec[i].pin, 1);</div>
+<div class="line">        } <span class="keywordflow">else</span> {</div>
+<div class="line">            <a class="code hl_function" href="group___g_i_o_p.html#gaff44adf38b055e964fe7e89834eabccc">GPIOState</a>(vec[i].pin, 0);</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">/*==================[EJERCICIO 6]==========================================*/</span></div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> <a id="a12" name="a12"></a><a class="code hl_function" href="group___display_functions.html#ga20e9c81495836581e857aa13672cb95e">displayNumber</a>(uint32_t data, uint8_t digits,</div>
+<div class="line">                   <a class="code hl_struct" href="structgpio_conf__t.html">gpioConf_t</a> *bcd_pins,</div>
+<div class="line">                   <a class="code hl_struct" href="structgpio_conf__t.html">gpioConf_t</a> *digit_pins)</div>
+<div class="line">{</div>
+<div class="line">    uint8_t bcd_array[digits];</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Convierto el número a array de dígitos</span></div>
+<div class="line">    <a class="code hl_function" href="group___conversion_functions.html#ga52ee2e8838ceab35f8bdc0f4e58a0dac">convertToBcdArray</a>(data, digits, bcd_array);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Recorro cada dígito del display</span></div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; digits; i++) {</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// Apago todos los dígitos antes de cambiar datos</span></div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; digits; j++) {</div>
+<div class="line">            <a class="code hl_function" href="group___g_i_o_p.html#gaff44adf38b055e964fe7e89834eabccc">GPIOState</a>(digit_pins[j].pin, 0);</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// Envío el valor BCD del dígito actual</span></div>
+<div class="line">        <a class="code hl_function" href="group___output_functions.html#ga4718aaf339c1e2d15dad917bdf22182c">bcdToGpio</a>(bcd_array[i], bcd_pins);</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// Activo SOLO el dígito correspondiente</span></div>
+<div class="line">        <a class="code hl_function" href="group___g_i_o_p.html#gaff44adf38b055e964fe7e89834eabccc">GPIOState</a>(digit_pins[i].pin, 1);</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// Pequeño delay para que parezca que no se borran</span></div>
+<div class="line">        <span class="comment">// Permite que el ojo humano perciba el dígito (persistencia visual)</span></div>
+<div class="line">        vTaskDelay(pdMS_TO_TICKS(<a id="_a13" name="_a13"></a><a class="code hl_define" href="group___display_config.html#ga85c97eaebc718c784c18c7cc9b3fedca">DISPLAY_MULTIPLEX_DELAY_MS</a>));</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">/*==================[MAIN]=================================================*/</span></div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> <a id="a14" name="a14"></a><a class="code hl_function" href="group___main_application.html#ga630544a7f0a2cc40d8a7fefab7e2fe70">app_main</a>(<span class="keywordtype">void</span>)</div>
+<div class="line">{</div>
+<div class="line">    <span class="comment">/* Pines BCD (datos) */</span></div>
+<div class="line">    <a class="code hl_struct" href="structgpio_conf__t.html">gpioConf_t</a> bcd_pins[4] = {</div>
+<div class="line">        {<a class="code hl_enumvalue" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a081be372da926e3ca6f612b267854e95">GPIO_20</a>, <a class="code hl_enumvalue" href="group___g_i_o_p.html#gga423620ef7d69894833f70cfc395caaa9aa248e73c1faee9c6f072fd91569cf516">GPIO_OUTPUT</a>}, <span class="comment">// b0</span></div>
+<div class="line">        {<a id="_a15" name="_a15"></a><a class="code hl_enumvalue" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a32ff7e9a2f00d396ff2b2b62af571d7c">GPIO_21</a>, <a class="code hl_enumvalue" href="group___g_i_o_p.html#gga423620ef7d69894833f70cfc395caaa9aa248e73c1faee9c6f072fd91569cf516">GPIO_OUTPUT</a>}, <span class="comment">// b1</span></div>
+<div class="line">        {<a id="_a16" name="_a16"></a><a class="code hl_enumvalue" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393aca7c5f2acf755d61b35d05ea921c79eb">GPIO_22</a>, <a class="code hl_enumvalue" href="group___g_i_o_p.html#gga423620ef7d69894833f70cfc395caaa9aa248e73c1faee9c6f072fd91569cf516">GPIO_OUTPUT</a>}, <span class="comment">// b2</span></div>
+<div class="line">        {<a id="_a17" name="_a17"></a><a class="code hl_enumvalue" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a4f3bac8a4733f9e96aa952fb1d9b0a7f">GPIO_23</a>, <a class="code hl_enumvalue" href="group___g_i_o_p.html#gga423620ef7d69894833f70cfc395caaa9aa248e73c1faee9c6f072fd91569cf516">GPIO_OUTPUT</a>}  <span class="comment">// b3</span></div>
+<div class="line">    };</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">/* Pines de selección de dígitos */</span></div>
+<div class="line">    <a class="code hl_struct" href="structgpio_conf__t.html">gpioConf_t</a> digit_pins[3] = {</div>
+<div class="line">        {<a id="_a18" name="_a18"></a><a class="code hl_enumvalue" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393aa2918c94bcf473e7ff31138b6333f847">GPIO_19</a>, <a class="code hl_enumvalue" href="group___g_i_o_p.html#gga423620ef7d69894833f70cfc395caaa9aa248e73c1faee9c6f072fd91569cf516">GPIO_OUTPUT</a>}, <span class="comment">// dígito 1</span></div>
+<div class="line">        {<a id="_a19" name="_a19"></a><a class="code hl_enumvalue" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a0e8bab7ea873c22eb90aa81116208917">GPIO_18</a>, <a class="code hl_enumvalue" href="group___g_i_o_p.html#gga423620ef7d69894833f70cfc395caaa9aa248e73c1faee9c6f072fd91569cf516">GPIO_OUTPUT</a>}, <span class="comment">// dígito 2</span></div>
+<div class="line">        {<a id="_a20" name="_a20"></a><a class="code hl_enumvalue" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a8bdaec9182fb8ab2106d5c67f3eabd2d">GPIO_9</a>,  <a class="code hl_enumvalue" href="group___g_i_o_p.html#gga423620ef7d69894833f70cfc395caaa9aa248e73c1faee9c6f072fd91569cf516">GPIO_OUTPUT</a>}  <span class="comment">// dígito 3</span></div>
+<div class="line">    };</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Inicializo todos los GPIOs</span></div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++) {</div>
+<div class="line">        <a class="code hl_function" href="group___g_i_o_p.html#ga10240d283f64bd1b09fca664fda27964">GPIOInit</a>(bcd_pins[i].pin, bcd_pins[i].dir);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 3; i++) {</div>
+<div class="line">        <a class="code hl_function" href="group___g_i_o_p.html#ga10240d283f64bd1b09fca664fda27964">GPIOInit</a>(digit_pins[i].pin, digit_pins[i].dir);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    uint32_t numero = 100;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">while</span> (1) {</div>
+<div class="line">        <span class="comment">// Mostrar número continuamente mediante multiplexación</span></div>
+<div class="line">        <a class="code hl_function" href="group___display_functions.html#ga20e9c81495836581e857aa13672cb95e">displayNumber</a>(numero, 3, bcd_pins, digit_pins);</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">/*==================[end of file]============================================*/</span></div>
+<div class="ttc" id="agpio__mcu_8h_html"><div class="ttname"><a href="gpio__mcu_8h.html">gpio_mcu.h</a></div></div>
+<div class="ttc" id="agroup___conversion_functions_html_ga52ee2e8838ceab35f8bdc0f4e58a0dac"><div class="ttname"><a href="group___conversion_functions.html#ga52ee2e8838ceab35f8bdc0f4e58a0dac">convertToBcdArray</a></div><div class="ttdeci">int8_t convertToBcdArray(uint32_t data, uint8_t digits, uint8_t *bcd_number)</div><div class="ttdef"><b>Definition</b> <a href="guia1__ejercicio6_8c_source.html#l00158">guia1_ejercicio6.c:158</a></div></div>
+<div class="ttc" id="agroup___display_config_html_ga85c97eaebc718c784c18c7cc9b3fedca"><div class="ttname"><a href="group___display_config.html#ga85c97eaebc718c784c18c7cc9b3fedca">DISPLAY_MULTIPLEX_DELAY_MS</a></div><div class="ttdeci">#define DISPLAY_MULTIPLEX_DELAY_MS</div><div class="ttdoc">Retardo en milisegundos para la multiplexación del display (persistencia visual).</div><div class="ttdef"><b>Definition</b> <a href="guia1__ejercicio6_8c_source.html#l00069">guia1_ejercicio6.c:69</a></div></div>
+<div class="ttc" id="agroup___display_functions_html_ga20e9c81495836581e857aa13672cb95e"><div class="ttname"><a href="group___display_functions.html#ga20e9c81495836581e857aa13672cb95e">displayNumber</a></div><div class="ttdeci">void displayNumber(uint32_t data, uint8_t digits, gpioConf_t *bcd_pins, gpioConf_t *digit_pins)</div><div class="ttdef"><b>Definition</b> <a href="guia1__ejercicio6_8c_source.html#l00302">guia1_ejercicio6.c:302</a></div></div>
+<div class="ttc" id="agroup___g_i_o_p_html_ga423620ef7d69894833f70cfc395caaa9"><div class="ttname"><a href="group___g_i_o_p.html#ga423620ef7d69894833f70cfc395caaa9">io_t</a></div><div class="ttdeci">io_t</div><div class="ttdoc">GPIO driver for the ESP-EDU Board.</div><div class="ttdef"><b>Definition</b> <a href="gpio__mcu_8h_source.html#l00042">gpio_mcu.h:42</a></div></div>
+<div class="ttc" id="agroup___g_i_o_p_html_gac6f7bd4f7ee306a4519f04641cbf2d67"><div class="ttname"><a href="group___g_i_o_p.html#gac6f7bd4f7ee306a4519f04641cbf2d67">gpio_t</a></div><div class="ttdeci">enum gpio_list gpio_t</div><div class="ttdoc">ESP32-C6 available GPIOs (not all of them are available in ESP-EDU).</div></div>
+<div class="ttc" id="agroup___g_i_o_p_html_gaff44adf38b055e964fe7e89834eabccc"><div class="ttname"><a href="group___g_i_o_p.html#gaff44adf38b055e964fe7e89834eabccc">GPIOState</a></div><div class="ttdeci">void GPIOState(gpio_t pin, bool state)</div><div class="ttdoc">Change GPIO state.</div><div class="ttdef"><b>Definition</b> <a href="gpio__mcu_8c_source.html#l00091">gpio_mcu.c:91</a></div></div>
+<div class="ttc" id="agroup___g_i_o_p_html_ggaf65604147d0244c9b13cfdc865ad5393a0e8bab7ea873c22eb90aa81116208917"><div class="ttname"><a href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a0e8bab7ea873c22eb90aa81116208917">GPIO_18</a></div><div class="ttdeci">@ GPIO_18</div><div class="ttdef"><b>Definition</b> <a href="gpio__mcu_8h_source.html#l00070">gpio_mcu.h:70</a></div></div>
+<div class="ttc" id="agroup___g_i_o_p_html_ggaf65604147d0244c9b13cfdc865ad5393a32ff7e9a2f00d396ff2b2b62af571d7c"><div class="ttname"><a href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a32ff7e9a2f00d396ff2b2b62af571d7c">GPIO_21</a></div><div class="ttdeci">@ GPIO_21</div><div class="ttdef"><b>Definition</b> <a href="gpio__mcu_8h_source.html#l00073">gpio_mcu.h:73</a></div></div>
+<div class="ttc" id="agroup___g_i_o_p_html_ggaf65604147d0244c9b13cfdc865ad5393a4f3bac8a4733f9e96aa952fb1d9b0a7f"><div class="ttname"><a href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a4f3bac8a4733f9e96aa952fb1d9b0a7f">GPIO_23</a></div><div class="ttdeci">@ GPIO_23</div><div class="ttdef"><b>Definition</b> <a href="gpio__mcu_8h_source.html#l00075">gpio_mcu.h:75</a></div></div>
+<div class="ttc" id="agroup___g_i_o_p_html_ggaf65604147d0244c9b13cfdc865ad5393a8bdaec9182fb8ab2106d5c67f3eabd2d"><div class="ttname"><a href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a8bdaec9182fb8ab2106d5c67f3eabd2d">GPIO_9</a></div><div class="ttdeci">@ GPIO_9</div><div class="ttdef"><b>Definition</b> <a href="gpio__mcu_8h_source.html#l00061">gpio_mcu.h:61</a></div></div>
+<div class="ttc" id="agroup___g_i_o_p_html_ggaf65604147d0244c9b13cfdc865ad5393aa2918c94bcf473e7ff31138b6333f847"><div class="ttname"><a href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393aa2918c94bcf473e7ff31138b6333f847">GPIO_19</a></div><div class="ttdeci">@ GPIO_19</div><div class="ttdef"><b>Definition</b> <a href="gpio__mcu_8h_source.html#l00071">gpio_mcu.h:71</a></div></div>
+<div class="ttc" id="agroup___g_i_o_p_html_ggaf65604147d0244c9b13cfdc865ad5393aca7c5f2acf755d61b35d05ea921c79eb"><div class="ttname"><a href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393aca7c5f2acf755d61b35d05ea921c79eb">GPIO_22</a></div><div class="ttdeci">@ GPIO_22</div><div class="ttdef"><b>Definition</b> <a href="gpio__mcu_8h_source.html#l00074">gpio_mcu.h:74</a></div></div>
+<div class="ttc" id="agroup___main_application_html_ga630544a7f0a2cc40d8a7fefab7e2fe70"><div class="ttname"><a href="group___main_application.html#ga630544a7f0a2cc40d8a7fefab7e2fe70">app_main</a></div><div class="ttdeci">void app_main(void)</div><div class="ttdef"><b>Definition</b> <a href="guia1__ejercicio6_8c_source.html#l00388">guia1_ejercicio6.c:388</a></div></div>
+<div class="ttc" id="agroup___output_functions_html_ga4718aaf339c1e2d15dad917bdf22182c"><div class="ttname"><a href="group___output_functions.html#ga4718aaf339c1e2d15dad917bdf22182c">bcdToGpio</a></div><div class="ttdeci">void bcdToGpio(uint8_t bcd, gpioConf_t *vec)</div><div class="ttdef"><b>Definition</b> <a href="guia1__ejercicio6_8c_source.html#l00222">guia1_ejercicio6.c:222</a></div></div>
+<div class="ttc" id="aili9341_8c_html_a070d2ce7b6bb7e5c05602aa8c308d0c4"><div class="ttname"><a href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></div><div class="ttdeci">#define NULL</div><div class="ttdef"><b>Definition</b> <a href="ili9341_8c_source.html#l00019">ili9341.c:19</a></div></div>
+</div><!-- fragment --> </div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

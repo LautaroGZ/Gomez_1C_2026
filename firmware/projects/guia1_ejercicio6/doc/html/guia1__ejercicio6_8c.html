@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Código para manejar un display BCD mediante una placa ESP32C6: Referencia del archivo C:/Users/zieli/Desktop/Facultad/Electronica_Programable/Repositorio/Gomez_1C_2026/firmware/projects/guia1_ejercicio6/main/guia1_ejercicio6.c</title>
+<link rel="icon" href="icon.ico" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fiuner.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">Código para manejar un display BCD mediante una placa ESP32C6<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Este programa implementa la multiplexación de un display de 7 segmentos</div>
+  </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('guia1__ejercicio6_8c.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Referencia del archivo guia1_ejercicio6.c</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Implementación de un controlador de display BCD con multiplexación en ESP32-C6.  
+<a href="#details">Más...</a></p>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="gpio__mcu_8h_source.html">gpio_mcu.h</a>&quot;</code><br />
+<code>#include &quot;freertos/FreeRTOS.h&quot;</code><br />
+<code>#include &quot;freertos/task.h&quot;</code><br />
+</div>
+<p><a href="guia1__ejercicio6_8c_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Estructuras de datos</h2></td></tr>
+<tr class="memitem:gpioConf_5Ft" id="r_gpioConf_5Ft"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structgpio_conf__t.html">gpioConf_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estructura de configuración para los pines GPIO.  <a href="structgpio_conf__t.html#details">Más...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:ga7bfa24fa4894bac3ec36a5e1e31c0e6e" id="r_ga7bfa24fa4894bac3ec36a5e1e31c0e6e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___display_config.html#ga7bfa24fa4894bac3ec36a5e1e31c0e6e">DISPLAY_DIGITS</a>&#160;&#160;&#160;3</td></tr>
+<tr class="memdesc:ga7bfa24fa4894bac3ec36a5e1e31c0e6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cantidad de dígitos en el display (3 dígitos).  <br /></td></tr>
+<tr class="memitem:gaa9d7093232700a729065977a32ee1258" id="r_gaa9d7093232700a729065977a32ee1258"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___display_config.html#gaa9d7093232700a729065977a32ee1258">BCD_BITS</a>&#160;&#160;&#160;4</td></tr>
+<tr class="memdesc:gaa9d7093232700a729065977a32ee1258"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cantidad de bits necesarios para codificar un dígito BCD (4 bits).  <br /></td></tr>
+<tr class="memitem:ga85c97eaebc718c784c18c7cc9b3fedca" id="r_ga85c97eaebc718c784c18c7cc9b3fedca"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___display_config.html#ga85c97eaebc718c784c18c7cc9b3fedca">DISPLAY_MULTIPLEX_DELAY_MS</a>&#160;&#160;&#160;5</td></tr>
+<tr class="memdesc:ga85c97eaebc718c784c18c7cc9b3fedca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retardo en milisegundos para la multiplexación del display (persistencia visual).  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:ga52ee2e8838ceab35f8bdc0f4e58a0dac" id="r_ga52ee2e8838ceab35f8bdc0f4e58a0dac"><td class="memItemLeft">int8_t&#160;</td><td class="memItemRight"><a class="el" href="group___conversion_functions.html#ga52ee2e8838ceab35f8bdc0f4e58a0dac">convertToBcdArray</a> (uint32_t data, uint8_t digits, uint8_t *bcd_number)</td></tr>
+<tr class="memitem:ga4718aaf339c1e2d15dad917bdf22182c" id="r_ga4718aaf339c1e2d15dad917bdf22182c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___output_functions.html#ga4718aaf339c1e2d15dad917bdf22182c">bcdToGpio</a> (uint8_t bcd, <a class="el" href="structgpio_conf__t.html">gpioConf_t</a> *vec)</td></tr>
+<tr class="memitem:ga20e9c81495836581e857aa13672cb95e" id="r_ga20e9c81495836581e857aa13672cb95e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___display_functions.html#ga20e9c81495836581e857aa13672cb95e">displayNumber</a> (uint32_t data, uint8_t digits, <a class="el" href="structgpio_conf__t.html">gpioConf_t</a> *bcd_pins, <a class="el" href="structgpio_conf__t.html">gpioConf_t</a> *digit_pins)</td></tr>
+<tr class="memitem:ga630544a7f0a2cc40d8a7fefab7e2fe70" id="r_ga630544a7f0a2cc40d8a7fefab7e2fe70"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group___main_application.html#ga630544a7f0a2cc40d8a7fefab7e2fe70">app_main</a> (void)</td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Implementación de un controlador de display BCD con multiplexación en ESP32-C6. </p>
+<dl class="section author"><dt>Autor</dt><dd>Lautaro Gómez (<a href="#" onclick="location.href='mai'+'lto:'+'lau'+'ta'+'ro.'+'go'+'mez'+'@i'+'nge'+'ni'+'eri'+'a.'+'une'+'r.'+'edu'+'.a'+'r'; return false;">lauta<span class="obfuscator">.nosp@m.</span>ro.g<span class="obfuscator">.nosp@m.</span>omez@<span class="obfuscator">.nosp@m.</span>inge<span class="obfuscator">.nosp@m.</span>nieri<span class="obfuscator">.nosp@m.</span>a.un<span class="obfuscator">.nosp@m.</span>er.ed<span class="obfuscator">.nosp@m.</span>u.ar</a>) </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>08/04/2026 </dd></dl>
+<dl class="section version"><dt>Versión</dt><dd>1.0</dd></dl>
+<p>Este módulo implementa el control de un display de 7 segmentos con múltiples dígitos usando un decodificador BCD (Binary-Coded Decimal) en lugar de controlar directamente los segmentos. La multiplexación temporal permite mostrar todos los dígitos con un conjunto reducido de pines GPIO, aprovechando la persistencia visual del ojo humano.</p>
+<h1 class="doxsection"><a class="anchor" id="intro"></a>
+Introducción</h1>
+<p>El proyecto utiliza la técnica de multiplexación dinámica para controlar un display de 3 dígitos con 7 segmentos cada uno, usando solo 7 pines GPIO:</p><ul>
+<li>4 pines para el bus de datos BCD</li>
+<li>3 pines para seleccionar qué dígito está activo en cada momento</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="algo"></a>
+Algoritmo</h1>
+<p>El algoritmo es simple pero efectivo:</p><ol type="1">
+<li>Dividir el número en dígitos individuales</li>
+<li>Para cada dígito:<ul>
+<li>Apagar todos los dígitos</li>
+<li>Enviar el dígito actual al decodificador BCD</li>
+<li>Activar el dígito actual</li>
+<li>Esperar ~5 ms (persistencia visual)</li>
+</ul>
+</li>
+<li>Repetir continuamente</li>
+</ol>
+<h1 class="doxsection"><a class="anchor" id="deps"></a>
+Dependencias</h1>
+<ul>
+<li><b><a class="el" href="gpio__mcu_8h.html">gpio_mcu.h</a></b>: Driver de GPIO personalizado (funciones GPIOInit, GPIOState)</li>
+<li><b>FreeRTOS</b>: Kernel de tiempo real para tareas y retardos (vTaskDelay)</li>
+<li><b>Estándares C</b>: stdio.h, stdint.h para tipos de datos</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="compilation"></a>
+Compilación</h1>
+<p>Este archivo forma parte de un proyecto ESP-IDF y se compila con: </p><div class="fragment"><div class="line">idf.py build</div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="testing"></a>
+Pruebas</h1>
+<p>El programa muestra el número 123 en un display de 3 dígitos de forma continua. Para cambiar el número mostrado, modificar el valor de la variable <span class="tt">numero</span> en <a class="el" href="group___main_application.html#ga630544a7f0a2cc40d8a7fefab7e2fe70">app_main()</a>. </p>
+
+<p class="definition">Definición en el archivo <a class="el" href="guia1__ejercicio6_8c_source.html">guia1_ejercicio6.c</a>.</p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_d9edf6c004b4a7ff14fe9ae7a92214ee.html">firmware</a></li><li class="navelem"><a href="dir_429d80758da54da73083af4edd40d0b3.html">projects</a></li><li class="navelem"><a href="dir_e5ed3adb3feda0cca4e9013d12ed8b48.html">guia1_ejercicio6</a></li><li class="navelem"><a href="dir_4159fa0c579be4ea447bbc200a76f868.html">main</a></li><li class="navelem"><a href="guia1__ejercicio6_8c.html">guia1_ejercicio6.c</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>
