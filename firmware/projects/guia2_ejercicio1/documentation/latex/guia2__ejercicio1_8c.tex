@@ -1,0 +1,261 @@
+\doxysection{C:\+/\+\+Users/\+zieli/\+\+Desktop/\+\+Facultad/\+\+Electronica\+\_\+\+Programable/\+\+Repositorio/\+\+Gomez\+\_\+1\+C\+\_\+2026/\+firmware/\+projects/\+guia2\+\_\+ejercicio1/\+main/\+guia2\+\_\+ejercicio1.c File Reference}
+\hypertarget{guia2__ejercicio1_8c}{}\label{guia2__ejercicio1_8c}\index{C:/Users/zieli/Desktop/Facultad/Electronica\_Programable/Repositorio/Gomez\_1C\_2026/firmware/projects/guia2\_ejercicio1/main/guia2\_ejercicio1.c@{C:/Users/zieli/Desktop/Facultad/Electronica\_Programable/Repositorio/Gomez\_1C\_2026/firmware/projects/guia2\_ejercicio1/main/guia2\_ejercicio1.c}}
+
+
+Medidor de distancia por ultrasonido con visualización en LCD.  
+
+
+{\ttfamily \+\#include $<$stdio.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \+\#include "{}freertos/\+\+Free\+RTOS.\+h"{}}\newline
+{\ttfamily \+\#include "{}freertos/\+task.\+h"{}}\newline
+{\ttfamily \+\#include "{}led.\+h"{}}\newline
+{\ttfamily \+\#include "{}switch.\+h"{}}\newline
+{\ttfamily \+\#include "{}hc\+\_\+sr04.\+h"{}}\newline
+{\ttfamily \+\#include "{}lcditse0803.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{guia2__ejercicio1_8c_a597f2121a697cffbc76061003f952b3e}{PERIODO\+\_\+\+MEDICION\+\_\+\+MS}}~1000
+\begin{DoxyCompactList}\small\item\em Período de actualización de la medición de distancia en milisegundos. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{guia2__ejercicio1_8c_ab2d0c2578aa3df568ab7809fe198a990}{PERIODO\+\_\+\+TECLADO\+\_\+\+MS}}~50
+\begin{DoxyCompactList}\small\item\em Período de escaneo del teclado en milisegundos. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{guia2__ejercicio1_8c_a3cff32d7d7af6fd140663517b1cc2e26}{REFRESH\+\_\+\+TICKS}}~(\doxymbox{\hyperlink{guia2__ejercicio1_8c_a597f2121a697cffbc76061003f952b3e}{PERIODO\+\_\+\+MEDICION\+\_\+\+MS}}/\+\doxymbox{\hyperlink{guia2__ejercicio1_8c_ab2d0c2578aa3df568ab7809fe198a990}{PERIODO\+\_\+\+TECLADO\+\_\+\+MS}})
+\begin{DoxyCompactList}\small\item\em Factor de escala para convertir milisegundos a ticks de Free\+RTOS. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{guia2__ejercicio1_8c_a81158e7f39de560c94fe1dd37f1cb5e4}{Tarea\+Medicion}} (void \texorpdfstring{$\ast$}{*}pv\+Parameter)
+\begin{DoxyCompactList}\small\item\em Tarea encargada de medir la distancia y actualizar salidas. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{guia2__ejercicio1_8c_acfdd7a743008b6704350626a1dffb676}{Tarea\+Teclas}} (void \texorpdfstring{$\ast$}{*}pv\+Parameter)
+\begin{DoxyCompactList}\small\item\em Tarea encargada de leer el estado de las teclas por polling. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{guia2__ejercicio1_8c_a630544a7f0a2cc40d8a7fefab7e2fe70}{app\+\_\+main}} (void)
+\begin{DoxyCompactList}\small\item\em Función principal de la aplicación. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{guia2__ejercicio1_8c_a285be2c6742f918ea121b725d24d5fbd}{medir\+\_\+activa}} = true
+\begin{DoxyCompactList}\small\item\em Bandera que controla si la medición está activa o pausada. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{guia2__ejercicio1_8c_af033e2094cb8572c9917cc37c79e2890}{hold\+\_\+activo}} = false
+\begin{DoxyCompactList}\small\item\em Bandera que controla si el display está en modo hold (retención). \end{DoxyCompactList}\item 
+uint16\+\_\+t \doxymbox{\hyperlink{guia2__ejercicio1_8c_ac6237df249fb5f0e9af9ae2c6bb31e54}{distancia\+\_\+cm}} = 0
+\begin{DoxyCompactList}\small\item\em Valor actual de distancia medida por el sensor en centímetros. \end{DoxyCompactList}\item 
+Task\+Handle\+\_\+t \doxymbox{\hyperlink{guia2__ejercicio1_8c_ac49675773e8afdad9d8f3691a8abcf6a}{medicion\+\_\+task\+\_\+handle}} = NULL
+\begin{DoxyCompactList}\small\item\em Handle de la tarea de medición de distancia. \end{DoxyCompactList}\item 
+Task\+Handle\+\_\+t \doxymbox{\hyperlink{guia2__ejercicio1_8c_a8180754a9854af6ae0b616fa10aeed8a}{teclas\+\_\+task\+\_\+handle}} = NULL
+\begin{DoxyCompactList}\small\item\em Handle de la tarea de lectura de teclas. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Medidor de distancia por ultrasonido con visualización en LCD. 
+
+Sistema de medición de distancia basado en sensor ultrasónico HC-\/\+SR04 con control de LEDs y display LCD para visualización de resultados. 
+
+\label{doc-define-members}
+\Hypertarget{guia2__ejercicio1_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{guia2__ejercicio1_8c_a597f2121a697cffbc76061003f952b3e}\index{guia2\_ejercicio1.c@{guia2\_ejercicio1.c}!PERIODO\_MEDICION\_MS@{PERIODO\_MEDICION\_MS}}
+\index{PERIODO\_MEDICION\_MS@{PERIODO\_MEDICION\_MS}!guia2\_ejercicio1.c@{guia2\_ejercicio1.c}}
+\doxysubsubsection{\texorpdfstring{PERIODO\_MEDICION\_MS}{PERIODO\_MEDICION\_MS}}
+{\footnotesize\ttfamily \label{guia2__ejercicio1_8c_a597f2121a697cffbc76061003f952b3e} 
+\+\#define PERIODO\+\_\+\+MEDICION\+\_\+\+MS~1000}
+
+
+
+Período de actualización de la medición de distancia en milisegundos. 
+
+Se ejecuta la lectura del sensor cada 1000 ms (1 segundo) \Hypertarget{guia2__ejercicio1_8c_ab2d0c2578aa3df568ab7809fe198a990}\index{guia2\_ejercicio1.c@{guia2\_ejercicio1.c}!PERIODO\_TECLADO\_MS@{PERIODO\_TECLADO\_MS}}
+\index{PERIODO\_TECLADO\_MS@{PERIODO\_TECLADO\_MS}!guia2\_ejercicio1.c@{guia2\_ejercicio1.c}}
+\doxysubsubsection{\texorpdfstring{PERIODO\_TECLADO\_MS}{PERIODO\_TECLADO\_MS}}
+{\footnotesize\ttfamily \label{guia2__ejercicio1_8c_ab2d0c2578aa3df568ab7809fe198a990} 
+\+\#define PERIODO\+\_\+\+TECLADO\+\_\+\+MS~50}
+
+
+
+Período de escaneo del teclado en milisegundos. 
+
+Se realiza polling de las teclas cada 50 ms \Hypertarget{guia2__ejercicio1_8c_a3cff32d7d7af6fd140663517b1cc2e26}\index{guia2\_ejercicio1.c@{guia2\_ejercicio1.c}!REFRESH\_TICKS@{REFRESH\_TICKS}}
+\index{REFRESH\_TICKS@{REFRESH\_TICKS}!guia2\_ejercicio1.c@{guia2\_ejercicio1.c}}
+\doxysubsubsection{\texorpdfstring{REFRESH\_TICKS}{REFRESH\_TICKS}}
+{\footnotesize\ttfamily \label{guia2__ejercicio1_8c_a3cff32d7d7af6fd140663517b1cc2e26} 
+\+\#define REFRESH\+\_\+\+TICKS~(\doxymbox{\hyperlink{guia2__ejercicio1_8c_a597f2121a697cffbc76061003f952b3e}{PERIODO\+\_\+\+MEDICION\+\_\+\+MS}}/\+\doxymbox{\hyperlink{guia2__ejercicio1_8c_ab2d0c2578aa3df568ab7809fe198a990}{PERIODO\+\_\+\+TECLADO\+\_\+\+MS}})}
+
+
+
+Factor de escala para convertir milisegundos a ticks de Free\+RTOS. 
+
+Calcula cuántos períodos de teclado caben en un período de medición 
+
+\label{doc-func-members}
+\Hypertarget{guia2__ejercicio1_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{guia2__ejercicio1_8c_a630544a7f0a2cc40d8a7fefab7e2fe70}\index{guia2\_ejercicio1.c@{guia2\_ejercicio1.c}!app\_main@{app\_main}}
+\index{app\_main@{app\_main}!guia2\_ejercicio1.c@{guia2\_ejercicio1.c}}
+\doxysubsubsection{\texorpdfstring{app\_main()}{app\_main()}}
+{\footnotesize\ttfamily \label{guia2__ejercicio1_8c_a630544a7f0a2cc40d8a7fefab7e2fe70} 
+void app\+\_\+main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Función principal de la aplicación. 
+
+
+\begin{DoxyItemize}
+\item Inicializa todos los periféricos (LEDs, switches, sensor HC-\/\+SR04, LCD)
+\item Crea las tareas de Free\+RTOS para medición y lectura de teclado
+\item Prioridades:\+
+\begin{DoxyItemize}
+\item Tarea\+Medicion:\+ Prioridad 5
+\item Tarea\+Teclas:\+ Prioridad 5
+\end{DoxyItemize}
+\item Stack size:\+
+\begin{DoxyItemize}
+\item Tarea\+Medicion:\+ 2048 bytes
+\item Tarea\+Teclas:\+ 1024 bytes 
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{guia2__ejercicio1_8c_init_perifericos}{}\doxysubsection{\texorpdfstring{Inicialización de Periféricos y Drivers}{Inicialización de Periféricos y Drivers}}\label{guia2__ejercicio1_8c_init_perifericos}
+Inicialización del módulo de LEDs Configura los GPIO asociados a los LEDs como salidas
+
+Inicialización del módulo de switches/\+botones Configura los GPIO de entrada para lectura de teclado
+
+Inicialización del sensor ultrasónico HC-\/\+SR04 
+\begin{DoxyParams}{Parameters}
+{\em GPIO\+\_\+3} & Pin de ECHO (entrada) \\
+\hline
+{\em GPIO\+\_\+2} & Pin de TRIGGER (salida)\\
+\hline
+\end{DoxyParams}
+Inicialización del display LCD ITS-\/\+E0803 Configura comunicación I2C y display para mostrar valores\hypertarget{guia2__ejercicio1_8c_create_tasks}{}\doxysubsection{\texorpdfstring{Creación de Tareas de Free\+RTOS}{Creación de Tareas de Free\+RTOS}}\label{guia2__ejercicio1_8c_create_tasks}
+Tarea de medición
+\begin{DoxyItemize}
+\item Nombre:\+ "{}\+Medicion"{}
+\item Stack:\+ 2048 bytes
+\item Prioridad:\+ 5
+\end{DoxyItemize}
+
+Tarea de teclado
+\begin{DoxyItemize}
+\item Nombre:\+ "{}\+Teclado"{}
+\item Stack:\+ 1024 bytes
+\item Prioridad:\+ 5
+\end{DoxyItemize}\Hypertarget{guia2__ejercicio1_8c_a81158e7f39de560c94fe1dd37f1cb5e4}\index{guia2\_ejercicio1.c@{guia2\_ejercicio1.c}!TareaMedicion@{TareaMedicion}}
+\index{TareaMedicion@{TareaMedicion}!guia2\_ejercicio1.c@{guia2\_ejercicio1.c}}
+\doxysubsubsection{\texorpdfstring{TareaMedicion()}{TareaMedicion()}}
+{\footnotesize\ttfamily \label{guia2__ejercicio1_8c_a81158e7f39de560c94fe1dd37f1cb5e4} 
+void Tarea\+Medicion (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameter}{}\end{DoxyParamCaption})}
+
+
+
+Tarea encargada de medir la distancia y actualizar salidas. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em pv\+Parameter} & Parámetro de la tarea (no utilizado) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+\begin{DoxyItemize}
+\item Realiza la lectura del sensor ultrasónico HC-\/\+SR04
+\item Actualiza el valor en el display LCD (si no está en hold)
+\item Controla el encendido de LEDs según rangos de distancia:\+
+\begin{DoxyItemize}
+\item \texorpdfstring{$<$}{<} 10 cm:\+ Todos los LEDs apagados
+\item 10-\/20 cm:\+ LED\+\_\+1 encendido
+\item 20-\/30 cm:\+ LED\+\_\+1 y LED\+\_\+2 encendidos
+\item \texorpdfstring{$>$}{>} 30 cm:\+ Todos los LEDs encendidos
+\end{DoxyItemize}
+\item Período de ejecución:\+ 1000 ms 
+\end{DoxyItemize}Lectura del sensor ultrasónico HC-\/\+SR04 Obtiene la distancia en centímetros
+
+Actualización del display LCD Solo se actualiza si no está en modo hold
+
+Control de LEDs según rangos de distancia Los LEDs se encienden progresivamente conforme aumenta la distancia
+
+Sistema pausado Apaga todos los LEDs y desactiva el display
+
+Espera antes del siguiente ciclo de medición Período:\+ 1000 ms\Hypertarget{guia2__ejercicio1_8c_acfdd7a743008b6704350626a1dffb676}\index{guia2\_ejercicio1.c@{guia2\_ejercicio1.c}!TareaTeclas@{TareaTeclas}}
+\index{TareaTeclas@{TareaTeclas}!guia2\_ejercicio1.c@{guia2\_ejercicio1.c}}
+\doxysubsubsection{\texorpdfstring{TareaTeclas()}{TareaTeclas()}}
+{\footnotesize\ttfamily \label{guia2__ejercicio1_8c_acfdd7a743008b6704350626a1dffb676} 
+void Tarea\+Teclas (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameter}{}\end{DoxyParamCaption})}
+
+
+
+Tarea encargada de leer el estado de las teclas por polling. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em pv\+Parameter} & Parámetro de la tarea (no utilizado) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+\begin{DoxyItemize}
+\item Lee el estado de las teclas cada 50 ms
+\item TEC1:\+ Alterna entre pausar/\+reanudar la medición (medir\+\_\+activa)
+\item TEC2:\+ Alterna entre modo hold/\+normal del display (hold\+\_\+activo)
+\item Período de ejecución:\+ 50 ms 
+\end{DoxyItemize}Variable local para almacenar el estado de las teclas
+
+Cada bit representa el estado de una tecla específica
+
+\label{doc-var-members}
+\Hypertarget{guia2__ejercicio1_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{guia2__ejercicio1_8c_ac6237df249fb5f0e9af9ae2c6bb31e54}\index{guia2\_ejercicio1.c@{guia2\_ejercicio1.c}!distancia\_cm@{distancia\_cm}}
+\index{distancia\_cm@{distancia\_cm}!guia2\_ejercicio1.c@{guia2\_ejercicio1.c}}
+\doxysubsubsection{\texorpdfstring{distancia\_cm}{distancia\_cm}}
+{\footnotesize\ttfamily \label{guia2__ejercicio1_8c_ac6237df249fb5f0e9af9ae2c6bb31e54} 
+uint16\+\_\+t distancia\+\_\+cm = 0}
+
+
+
+Valor actual de distancia medida por el sensor en centímetros. 
+
+Se actualiza en cada ciclo de la tarea de medición \Hypertarget{guia2__ejercicio1_8c_af033e2094cb8572c9917cc37c79e2890}\index{guia2\_ejercicio1.c@{guia2\_ejercicio1.c}!hold\_activo@{hold\_activo}}
+\index{hold\_activo@{hold\_activo}!guia2\_ejercicio1.c@{guia2\_ejercicio1.c}}
+\doxysubsubsection{\texorpdfstring{hold\_activo}{hold\_activo}}
+{\footnotesize\ttfamily \label{guia2__ejercicio1_8c_af033e2094cb8572c9917cc37c79e2890} 
+bool hold\+\_\+activo = false}
+
+
+
+Bandera que controla si el display está en modo hold (retención). 
+
+Inicializada en false. Se alterna con la pulsación de TEC2. Cuando está activa, el valor en LCD no se actualiza \Hypertarget{guia2__ejercicio1_8c_ac49675773e8afdad9d8f3691a8abcf6a}\index{guia2\_ejercicio1.c@{guia2\_ejercicio1.c}!medicion\_task\_handle@{medicion\_task\_handle}}
+\index{medicion\_task\_handle@{medicion\_task\_handle}!guia2\_ejercicio1.c@{guia2\_ejercicio1.c}}
+\doxysubsubsection{\texorpdfstring{medicion\_task\_handle}{medicion\_task\_handle}}
+{\footnotesize\ttfamily \label{guia2__ejercicio1_8c_ac49675773e8afdad9d8f3691a8abcf6a} 
+Task\+Handle\+\_\+t medicion\+\_\+task\+\_\+handle = NULL}
+
+
+
+Handle de la tarea de medición de distancia. 
+
+Se utiliza para gestionar la tarea de medición \Hypertarget{guia2__ejercicio1_8c_a285be2c6742f918ea121b725d24d5fbd}\index{guia2\_ejercicio1.c@{guia2\_ejercicio1.c}!medir\_activa@{medir\_activa}}
+\index{medir\_activa@{medir\_activa}!guia2\_ejercicio1.c@{guia2\_ejercicio1.c}}
+\doxysubsubsection{\texorpdfstring{medir\_activa}{medir\_activa}}
+{\footnotesize\ttfamily \label{guia2__ejercicio1_8c_a285be2c6742f918ea121b725d24d5fbd} 
+bool medir\+\_\+activa = true}
+
+
+
+Bandera que controla si la medición está activa o pausada. 
+
+Inicializada en true. Se alterna con la pulsación de TEC1 \Hypertarget{guia2__ejercicio1_8c_a8180754a9854af6ae0b616fa10aeed8a}\index{guia2\_ejercicio1.c@{guia2\_ejercicio1.c}!teclas\_task\_handle@{teclas\_task\_handle}}
+\index{teclas\_task\_handle@{teclas\_task\_handle}!guia2\_ejercicio1.c@{guia2\_ejercicio1.c}}
+\doxysubsubsection{\texorpdfstring{teclas\_task\_handle}{teclas\_task\_handle}}
+{\footnotesize\ttfamily \label{guia2__ejercicio1_8c_a8180754a9854af6ae0b616fa10aeed8a} 
+Task\+Handle\+\_\+t teclas\+\_\+task\+\_\+handle = NULL}
+
+
+
+Handle de la tarea de lectura de teclas. 
+
+Se utiliza para gestionar la tarea de lectura del teclado 
