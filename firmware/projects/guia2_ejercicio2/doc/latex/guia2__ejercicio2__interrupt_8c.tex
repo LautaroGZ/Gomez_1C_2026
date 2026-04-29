@@ -1,0 +1,295 @@
+\doxysection{C:\+/\+\+Users/\+zieli/\+\+Desktop/\+\+Facultad/\+\+Electronica\+\_\+\+Programable/\+\+Repositorio/\+\+Gomez\+\_\+1\+C\+\_\+2026/\+firmware/\+projects/\+guia2\+\_\+ejercicio2/\+main/\+guia2\+\_\+ejercicio2\+\_\+interrupt.c File Reference}
+\hypertarget{guia2__ejercicio2__interrupt_8c}{}\label{guia2__ejercicio2__interrupt_8c}\index{C:/Users/zieli/Desktop/Facultad/Electronica\_Programable/Repositorio/Gomez\_1C\_2026/firmware/projects/guia2\_ejercicio2/main/guia2\_ejercicio2\_interrupt.c@{C:/Users/zieli/Desktop/Facultad/Electronica\_Programable/Repositorio/Gomez\_1C\_2026/firmware/projects/guia2\_ejercicio2/main/guia2\_ejercicio2\_interrupt.c}}
+{\ttfamily \+\#include $<$stdio.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \+\#include "{}freertos/\+\+Free\+RTOS.\+h"{}}\newline
+{\ttfamily \+\#include "{}freertos/\+task.\+h"{}}\newline
+{\ttfamily \+\#include "{}led.\+h"{}}\newline
+{\ttfamily \+\#include "{}switch.\+h"{}}\newline
+{\ttfamily \+\#include "{}hc\+\_\+sr04.\+h"{}}\newline
+{\ttfamily \+\#include "{}lcditse0803.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{guia2__ejercicio2__interrupt_8c_a597f2121a697cffbc76061003f952b3e}{PERIODO\+\_\+\+MEDICION\+\_\+\+MS}}~1000
+\begin{DoxyCompactList}\small\item\em Período de medición en milisegundos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{guia2__ejercicio2__interrupt_8c_a81158e7f39de560c94fe1dd37f1cb5e4}{Tarea\+Medicion}} (void \texorpdfstring{$\ast$}{*}pv\+Parameter)
+\begin{DoxyCompactList}\small\item\em Tarea Free\+RTOS para medición periódica de distancia. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{guia2__ejercicio2__interrupt_8c_aef14f4c0ac91ce2e9d51fa083985f04e}{Cambiar\+Estado\+Medicion}} (void \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Callback de interrupción para SWITCH\+\_\+1 (Inicio/\+\+Pausa de medición). \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{guia2__ejercicio2__interrupt_8c_a9274a1dbc1c5e992fb6dd6ee30c8696c}{Cambiar\+Estado\+Hold}} (void \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Callback de interrupción para SWITCH\+\_\+2 (HOLD de lectura). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+volatile bool \doxymbox{\hyperlink{guia2__ejercicio2__interrupt_8c_ad8b8a0472faf8e23beec6445266e3865}{medir\+\_\+activa}} = true
+\begin{DoxyCompactList}\small\item\em Indicador de estado de medición. \end{DoxyCompactList}\item 
+volatile bool \doxymbox{\hyperlink{guia2__ejercicio2__interrupt_8c_a0ba8721de317bd3b74c94872c7a40e8c}{hold\+\_\+activo}} = false
+\begin{DoxyCompactList}\small\item\em Indicador de estado HOLD (congelación de lectura). \end{DoxyCompactList}\item 
+uint16\+\_\+t \doxymbox{\hyperlink{guia2__ejercicio2__interrupt_8c_ac6237df249fb5f0e9af9ae2c6bb31e54}{distancia\+\_\+cm}} = 0
+\begin{DoxyCompactList}\small\item\em Última distancia medida en centímetros. \end{DoxyCompactList}\item 
+Task\+Handle\+\_\+t \doxymbox{\hyperlink{guia2__ejercicio2__interrupt_8c_ac49675773e8afdad9d8f3691a8abcf6a}{medicion\+\_\+task\+\_\+handle}} = NULL
+\begin{DoxyCompactList}\small\item\em Handle (identificador) de la tarea de medición. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{guia2__ejercicio2__interrupt_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{guia2__ejercicio2__interrupt_8c_a597f2121a697cffbc76061003f952b3e}\index{guia2\_ejercicio2\_interrupt.c@{guia2\_ejercicio2\_interrupt.c}!PERIODO\_MEDICION\_MS@{PERIODO\_MEDICION\_MS}}
+\index{PERIODO\_MEDICION\_MS@{PERIODO\_MEDICION\_MS}!guia2\_ejercicio2\_interrupt.c@{guia2\_ejercicio2\_interrupt.c}}
+\doxysubsubsection{\texorpdfstring{PERIODO\_MEDICION\_MS}{PERIODO\_MEDICION\_MS}}
+{\footnotesize\ttfamily \label{guia2__ejercicio2__interrupt_8c_a597f2121a697cffbc76061003f952b3e} 
+\+\#define PERIODO\+\_\+\+MEDICION\+\_\+\+MS~1000}
+
+
+
+Período de medición en milisegundos. 
+
+\texorpdfstring{$<$}{<} Incluye función printf para salida por consola \texorpdfstring{$<$}{<} Tipos enteros de ancho fijo \texorpdfstring{$<$}{<} Tipo booleano y valores true/\+false \texorpdfstring{$<$}{<} Kernel de Free\+RTOS \texorpdfstring{$<$}{<} APIs de tareas de Free\+RTOS \texorpdfstring{$<$}{<} Driver de LEDs \texorpdfstring{$<$}{<} Driver de pulsadores/\+switches \texorpdfstring{$<$}{<} Driver del sensor ultrasónico HC-\/\+SR04 \texorpdfstring{$<$}{<} Driver del display LCD ITS-\/\+E0803
+
+Define el intervalo de tiempo entre cada lectura del sensor ultrasónico HC-\/\+SR04 y actualización de LEDs y display LCD. Valor:\+ 1000 ms (1 segundo). 
+
+\label{doc-func-members}
+\Hypertarget{guia2__ejercicio2__interrupt_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{guia2__ejercicio2__interrupt_8c_a9274a1dbc1c5e992fb6dd6ee30c8696c}\index{guia2\_ejercicio2\_interrupt.c@{guia2\_ejercicio2\_interrupt.c}!CambiarEstadoHold@{CambiarEstadoHold}}
+\index{CambiarEstadoHold@{CambiarEstadoHold}!guia2\_ejercicio2\_interrupt.c@{guia2\_ejercicio2\_interrupt.c}}
+\doxysubsubsection{\texorpdfstring{CambiarEstadoHold()}{CambiarEstadoHold()}}
+{\footnotesize\ttfamily \label{guia2__ejercicio2__interrupt_8c_a9274a1dbc1c5e992fb6dd6ee30c8696c} 
+void Cambiar\+Estado\+Hold (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Callback de interrupción para SWITCH\+\_\+2 (HOLD de lectura). 
+
+ISR para SWITCH\+\_\+2 -\/ Activar/\+\+Desactivar HOLD (congelación de lectura).
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parámetro de entrada (no utilizado)\\
+\hline
+\end{DoxyParams}
+Función de servicio de interrupción que se ejecuta cuando se presiona SWITCH\+\_\+2. Alterna el estado de congelación de lectura (HOLD). Esto congela/\+libera la actualización del display LCD manteniendo las mediciones internas activas.
+
+\begin{DoxyNote}{Note}
+Debe ser lo más corta y rápida posible (buena práctica ISR).
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parámetro de entrada de la ISR (no utilizado)\\
+\hline
+\end{DoxyParams}
+Alterna el estado de HOLD (hold\+\_\+activo) para congelar/\+liberar la actualización del display LCD. Se ejecuta automáticamente al presionar SWITCH\+\_\+2. Las mediciones internas continúan cuando HOLD está activo. Imprime un mensaje en la consola indicando que se presionó SWITCH\+\_\+2.
+
+\begin{DoxyNote}{Note}
+Esta es una ISR, debe ser lo más breve posible. Solo modifica una variable volatile (buena práctica). 
+\end{DoxyNote}
+\Hypertarget{guia2__ejercicio2__interrupt_8c_aef14f4c0ac91ce2e9d51fa083985f04e}\index{guia2\_ejercicio2\_interrupt.c@{guia2\_ejercicio2\_interrupt.c}!CambiarEstadoMedicion@{CambiarEstadoMedicion}}
+\index{CambiarEstadoMedicion@{CambiarEstadoMedicion}!guia2\_ejercicio2\_interrupt.c@{guia2\_ejercicio2\_interrupt.c}}
+\doxysubsubsection{\texorpdfstring{CambiarEstadoMedicion()}{CambiarEstadoMedicion()}}
+{\footnotesize\ttfamily \label{guia2__ejercicio2__interrupt_8c_aef14f4c0ac91ce2e9d51fa083985f04e} 
+void Cambiar\+Estado\+Medicion (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Callback de interrupción para SWITCH\+\_\+1 (Inicio/\+\+Pausa de medición). 
+
+ISR para SWITCH\+\_\+1 -\/ Activar/\+\+Desactivar medición.
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parámetro de entrada (no utilizado)\\
+\hline
+\end{DoxyParams}
+Función de servicio de interrupción que se ejecuta cuando se presiona SWITCH\+\_\+1. Alterna el estado de medición (activa/\+inactiva).
+
+\begin{DoxyNote}{Note}
+Debe ser lo más corta y rápida posible (buena práctica ISR). Por eso solo modifica la variable volatile medir\+\_\+activa.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parámetro de entrada de la ISR (no utilizado)\\
+\hline
+\end{DoxyParams}
+Alterna el estado de medición (medir\+\_\+activa) entre activo e inactivo. Se ejecuta automáticamente al presionar SWITCH\+\_\+1. Imprime un mensaje en la consola indicando que se presionó SWITCH\+\_\+1.
+
+\begin{DoxyNote}{Note}
+Esta es una ISR, debe ser lo más breve posible. Solo modifica una variable volatile (buena práctica). 
+\end{DoxyNote}
+\Hypertarget{guia2__ejercicio2__interrupt_8c_a81158e7f39de560c94fe1dd37f1cb5e4}\index{guia2\_ejercicio2\_interrupt.c@{guia2\_ejercicio2\_interrupt.c}!TareaMedicion@{TareaMedicion}}
+\index{TareaMedicion@{TareaMedicion}!guia2\_ejercicio2\_interrupt.c@{guia2\_ejercicio2\_interrupt.c}}
+\doxysubsubsection{\texorpdfstring{TareaMedicion()}{TareaMedicion()}}
+{\footnotesize\ttfamily \label{guia2__ejercicio2__interrupt_8c_a81158e7f39de560c94fe1dd37f1cb5e4} 
+void Tarea\+Medicion (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameter}{}\end{DoxyParamCaption})}
+
+
+
+Tarea Free\+RTOS para medición periódica de distancia. 
+
+Tarea Free\+RTOS -\/ Medición periódica de distancia con HC-\/\+SR04.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pv\+Parameter} & Parámetro de entrada de la tarea (no utilizado)\\
+\hline
+\end{DoxyParams}
+Esta tarea se ejecuta de forma periódica cada PERIODO\+\_\+\+MEDICION\+\_\+\+MS ms. En cada iteración:\+
+\begin{DoxyItemize}
+\item Lee la distancia del sensor HC-\/\+SR04
+\item Actualiza el display LCD (si HOLD no está activo)
+\item Controla los LEDs según el rango de distancia:\+
+\begin{DoxyItemize}
+\item \texorpdfstring{$<$}{<} 10 cm:\+ todos los LEDs apagados
+\item 10-\/19 cm:\+ LED\+\_\+1 encendido
+\item 20-\/30 cm:\+ LED\+\_\+1 y LED\+\_\+2 encendidos
+\item \texorpdfstring{$>$}{>} 30 cm:\+ todos los LEDs encendidos
+\end{DoxyItemize}
+\item Si medir\+\_\+activa es false, apaga todos los LEDs y el LCD
+\end{DoxyItemize}
+
+\begin{DoxyNote}{Note}
+Esta tarea es de ejecución continua (bucle infinito)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em pv\+Parameter} & Parámetro de entrada de la tarea (no utilizado)\\
+\hline
+\end{DoxyParams}
+Tarea de tiempo real que se ejecuta periódicamente cada PERIODO\+\_\+\+MEDICION\+\_\+\+MS.
+
+Funcionalidad:\+
+\begin{DoxyEnumerate}
+\item Si medir\+\_\+activa es true:\+
+\begin{DoxyItemize}
+\item Lee distancia del sensor HC-\/\+SR04
+\item Actualiza display LCD (solo si hold\+\_\+activo es false)
+\item Controla LEDs según rango de distancia:\+
+\begin{DoxyItemize}
+\item \texorpdfstring{$<$}{<} 10 cm:\+ LEDs apagados
+\item 10-\/19 cm:\+ LED\+\_\+1 encendido
+\item 20-\/30 cm:\+ LED\+\_\+1 y LED\+\_\+2 encendidos
+\item \texorpdfstring{$>$}{>} 30 cm:\+ LED\+\_\+1, LED\+\_\+2 y LED\+\_\+3 encendidos
+\end{DoxyItemize}
+\end{DoxyItemize}
+\item Si medir\+\_\+activa es false:\+
+\begin{DoxyItemize}
+\item Apaga todos los LEDs
+\item Apaga el display LCD
+\end{DoxyItemize}
+\item Espera PERIODO\+\_\+\+MEDICION\+\_\+\+MS antes de la siguiente iteración
+\end{DoxyEnumerate}
+
+\begin{DoxyNote}{Note}
+Esta es una tarea de ejecución continua (bucle infinito). Prioridad:\+ 5 (medio) Stack:\+ 2048 bytes 
+\end{DoxyNote}
+Función principal -\/ Punto de entrada de la aplicación
+
+Inicializa todos los periféricos y configura el sistema:\+
+\begin{DoxyEnumerate}
+\item Inicializa los drivers de hardware:\+
+\begin{DoxyItemize}
+\item LEDs (3 indicadores luminosos)
+\item Switches/\+\+Pulsadores (SWITCH\+\_\+1 y SWITCH\+\_\+2)
+\item Sensor ultrasónico HC-\/\+SR04 (GPIO\+\_\+3:\+ TRIG, GPIO\+\_\+2:\+ ECHO)
+\item Display LCD de 8 dígitos (ITS-\/\+E0803)
+\end{DoxyItemize}
+\item Configura interrupciones para los pulsadores:\+
+\begin{DoxyItemize}
+\item SWITCH\+\_\+1 -\/\texorpdfstring{$>$}{>} Cambiar\+Estado\+Medicion (activar/\+desactivar medición)
+\item SWITCH\+\_\+2 -\/\texorpdfstring{$>$}{>} Cambiar\+Estado\+Hold (congelar/\+liberar lectura LCD)
+\end{DoxyItemize}
+\item Crea la tarea Free\+RTOS de medición
+\end{DoxyEnumerate}
+
+\begin{DoxyNote}{Note}
+Una vez que esta función termina, el scheduler de Free\+RTOS toma control y ejecuta las tareas creadas.
+\end{DoxyNote}
+\texorpdfstring{$<$}{<} Inicializa driver de LEDs
+
+\texorpdfstring{$<$}{<} Inicializa driver de pulsadores
+
+\texorpdfstring{$<$}{<} Inicializa sensor HC-\/\+SR04 (TRIG:\+ GPIO\+\_\+3, ECHO:\+ GPIO\+\_\+2)
+
+\texorpdfstring{$<$}{<} Inicializa display LCD
+
+\texorpdfstring{$<$}{<} Función de la tarea
+
+\texorpdfstring{$<$}{<} Nombre de la tarea (para depuración)
+
+\texorpdfstring{$<$}{<} Tamaño del stack (palabras)
+
+\texorpdfstring{$<$}{<} Parámetro de entrada (no utilizado)
+
+\texorpdfstring{$<$}{<} Prioridad (0-\/config\+MAX\+\_\+\+PRIORITIES-\/1)
+
+\texorpdfstring{$<$}{<} Handle para referencia posterior
+
+\label{doc-var-members}
+\Hypertarget{guia2__ejercicio2__interrupt_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{guia2__ejercicio2__interrupt_8c_ac6237df249fb5f0e9af9ae2c6bb31e54}\index{guia2\_ejercicio2\_interrupt.c@{guia2\_ejercicio2\_interrupt.c}!distancia\_cm@{distancia\_cm}}
+\index{distancia\_cm@{distancia\_cm}!guia2\_ejercicio2\_interrupt.c@{guia2\_ejercicio2\_interrupt.c}}
+\doxysubsubsection{\texorpdfstring{distancia\_cm}{distancia\_cm}}
+{\footnotesize\ttfamily \label{guia2__ejercicio2__interrupt_8c_ac6237df249fb5f0e9af9ae2c6bb31e54} 
+uint16\+\_\+t distancia\+\_\+cm = 0}
+
+
+
+Última distancia medida en centímetros. 
+
+Almacena el valor de distancia más reciente obtenido del sensor HC-\/\+SR04. Se actualiza periódicamente en la tarea Tarea\+Medicion. Rango típico:\+ 0-\/400 cm (depende del sensor). \Hypertarget{guia2__ejercicio2__interrupt_8c_a0ba8721de317bd3b74c94872c7a40e8c}\index{guia2\_ejercicio2\_interrupt.c@{guia2\_ejercicio2\_interrupt.c}!hold\_activo@{hold\_activo}}
+\index{hold\_activo@{hold\_activo}!guia2\_ejercicio2\_interrupt.c@{guia2\_ejercicio2\_interrupt.c}}
+\doxysubsubsection{\texorpdfstring{hold\_activo}{hold\_activo}}
+{\footnotesize\ttfamily \label{guia2__ejercicio2__interrupt_8c_a0ba8721de317bd3b74c94872c7a40e8c} 
+volatile bool hold\+\_\+activo = false}
+
+
+
+Indicador de estado HOLD (congelación de lectura). 
+
+Variable global volátil que controla si la lectura del display está congelada o actualiza dinámicamente. Se modifica por interrupción de SWITCH\+\_\+2. Debe ser volatile por la misma razón que medir\+\_\+activa.
+
+
+\begin{DoxyItemize}
+\item {\ttfamily true:\+} Lectura congelada (HOLD), no se actualiza display
+\item {\ttfamily false:\+} Lectura actualizada dinámicamente
+\end{DoxyItemize}
+
+\begin{DoxyNote}{Note}
+La distancia medida se sigue procesando internamente, solo se congela la visualización en el LCD. 
+\end{DoxyNote}
+\Hypertarget{guia2__ejercicio2__interrupt_8c_ac49675773e8afdad9d8f3691a8abcf6a}\index{guia2\_ejercicio2\_interrupt.c@{guia2\_ejercicio2\_interrupt.c}!medicion\_task\_handle@{medicion\_task\_handle}}
+\index{medicion\_task\_handle@{medicion\_task\_handle}!guia2\_ejercicio2\_interrupt.c@{guia2\_ejercicio2\_interrupt.c}}
+\doxysubsubsection{\texorpdfstring{medicion\_task\_handle}{medicion\_task\_handle}}
+{\footnotesize\ttfamily \label{guia2__ejercicio2__interrupt_8c_ac49675773e8afdad9d8f3691a8abcf6a} 
+Task\+Handle\+\_\+t medicion\+\_\+task\+\_\+handle = NULL}
+
+
+
+Handle (identificador) de la tarea de medición. 
+
+Almacena el handle de la tarea Free\+RTOS Tarea\+Medicion para referencia posterior si es necesario (suspender, reanudar, eliminar, etc.). \Hypertarget{guia2__ejercicio2__interrupt_8c_ad8b8a0472faf8e23beec6445266e3865}\index{guia2\_ejercicio2\_interrupt.c@{guia2\_ejercicio2\_interrupt.c}!medir\_activa@{medir\_activa}}
+\index{medir\_activa@{medir\_activa}!guia2\_ejercicio2\_interrupt.c@{guia2\_ejercicio2\_interrupt.c}}
+\doxysubsubsection{\texorpdfstring{medir\_activa}{medir\_activa}}
+{\footnotesize\ttfamily \label{guia2__ejercicio2__interrupt_8c_ad8b8a0472faf8e23beec6445266e3865} 
+volatile bool medir\+\_\+activa = true}
+
+
+
+Indicador de estado de medición. 
+
+Variable global volátil que controla si el sistema está activo o inactivo. Se modifica por interrupción de SWITCH\+\_\+1. Debe ser volatile porque se modifica en la ISR \doxylink{guia2__ejercicio2__interrupt_8c_aef14f4c0ac91ce2e9d51fa083985f04e}{Cambiar\+Estado\+Medicion()} y se lee en \doxylink{guia2__ejercicio2__interrupt_8c_a81158e7f39de560c94fe1dd37f1cb5e4}{Tarea\+Medicion()}.
+
+
+\begin{DoxyItemize}
+\item {\ttfamily true:\+} Sistema activo, realiza mediciones
+\item {\ttfamily false:\+} Sistema inactivo, LEDs apagados y LCD apagado
+\end{DoxyItemize}
+
+\begin{DoxyNote}{Note}
+Obligatorio usar volatile cuando una variable se modifica dentro de una ISR y se lee en otra parte del programa. 
+\end{DoxyNote}
