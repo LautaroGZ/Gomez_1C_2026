@@ -1,0 +1,71 @@
+\doxysection{C:\+/\+\+Users/\+zieli/\+\+Desktop/\+\+Facultad/\+\+Electronica\+\_\+\+Programable/\+\+Repositorio/\+\+Gomez\+\_\+1\+C\+\_\+2026/\+firmware/\+projects/\+guia\+\_\+2ejercicio2\+\_\+timers/\+main/\+guia2\+\_\+ejercicio2\+\_\+timers.c File Reference}
+\hypertarget{guia2__ejercicio2__timers_8c}{}\label{guia2__ejercicio2__timers_8c}\index{C:/Users/zieli/Desktop/Facultad/Electronica\_Programable/Repositorio/Gomez\_1C\_2026/firmware/projects/guia\_2ejercicio2\_timers/main/guia2\_ejercicio2\_timers.c@{C:/Users/zieli/Desktop/Facultad/Electronica\_Programable/Repositorio/Gomez\_1C\_2026/firmware/projects/guia\_2ejercicio2\_timers/main/guia2\_ejercicio2\_timers.c}}
+
+
+Sistema de medición de distancia con sensor ultrasónico HC-\/\+SR04.  
+
+
+{\ttfamily \+\#include $<$stdio.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \+\#include "{}freertos/\+\+Free\+RTOS.\+h"{}}\newline
+{\ttfamily \+\#include "{}freertos/\+task.\+h"{}}\newline
+{\ttfamily \+\#include "{}led.\+h"{}}\newline
+{\ttfamily \+\#include "{}switch.\+h"{}}\newline
+{\ttfamily \+\#include "{}hc\+\_\+sr04.\+h"{}}\newline
+{\ttfamily \+\#include "{}lcditse0803.\+h"{}}\newline
+{\ttfamily \+\#include "{}timer\+\_\+mcu.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group__guia2__ejercicio2__timers_gac1c3a70f8910b90edb3ffb7f9df109c8}{PERIODO\+\_\+\+MEDICION\+\_\+\+US}}~1000000
+\begin{DoxyCompactList}\small\item\em Período de medición en microsegundos Define el intervalo de tiempo (1000000 us = 1 segundo) para el timer de hardware. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{group__guia2__ejercicio2__timers_ga81158e7f39de560c94fe1dd37f1cb5e4}{Tarea\+Medicion}} (void \texorpdfstring{$\ast$}{*}pv\+Parameter)
+\begin{DoxyCompactList}\small\item\em Tarea periódica que realiza la medición de distancia. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__guia2__ejercicio2__timers_gaef14f4c0ac91ce2e9d51fa083985f04e}{Cambiar\+Estado\+Medicion}} (void \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Cambia el estado de la medición. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__guia2__ejercicio2__timers_ga9274a1dbc1c5e992fb6dd6ee30c8696c}{Cambiar\+Estado\+Hold}} (void \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Cambia el estado de HOLD. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__guia2__ejercicio2__timers_gab2b0b81c87cb261c1bf435e9ba889329}{Atender\+Interrupcion\+Timer}} (void \texorpdfstring{$\ast$}{*}param)
+\begin{DoxyCompactList}\small\item\em Maneja la interrupción periódica del timer de hardware. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__guia2__ejercicio2__timers_ga630544a7f0a2cc40d8a7fefab7e2fe70}{app\+\_\+main}} (void)
+\begin{DoxyCompactList}\small\item\em Función principal -\/ Punto de entrada de la aplicación. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+volatile bool \doxymbox{\hyperlink{group__guia2__ejercicio2__timers_gad8b8a0472faf8e23beec6445266e3865}{medir\+\_\+activa}} = true
+\begin{DoxyCompactList}\small\item\em Indica si la medición está activa. \end{DoxyCompactList}\item 
+volatile bool \doxymbox{\hyperlink{group__guia2__ejercicio2__timers_ga0ba8721de317bd3b74c94872c7a40e8c}{hold\+\_\+activo}} = false
+\begin{DoxyCompactList}\small\item\em Indica si la función HOLD está activa. \end{DoxyCompactList}\item 
+uint16\+\_\+t \doxymbox{\hyperlink{group__guia2__ejercicio2__timers_gac6237df249fb5f0e9af9ae2c6bb31e54}{distancia\+\_\+cm}} = 0
+\begin{DoxyCompactList}\small\item\em Última distancia medida en centímetros. \end{DoxyCompactList}\item 
+Task\+Handle\+\_\+t \doxymbox{\hyperlink{group__guia2__ejercicio2__timers_gac49675773e8afdad9d8f3691a8abcf6a}{medicion\+\_\+task\+\_\+handle}} = NULL
+\begin{DoxyCompactList}\small\item\em Handle de la tarea de medición Free\+RTOS. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Sistema de medición de distancia con sensor ultrasónico HC-\/\+SR04. 
+
+Este módulo implementa un sistema de medición de distancia basado en el sensor ultrasónico HC-\/\+SR04. La aplicación utiliza un timer de hardware y una tarea Free\+RTOS para realizar mediciones periódicas. La información se muestra en un display LCD y se controla un conjunto de LEDs según el rango de distancia detectado.
+
+Características principales:\+
+\begin{DoxyItemize}
+\item Medición de distancia en centímetros.
+\item Visualización en display LCD ITS E0803.
+\item Indicadores LED de rango de proximidad.
+\item Dos pulsadores para activar/\+desactivar la medición y congelar la pantalla.
+\item Uso de interrupciones y notificaciones desde ISR a tarea Free\+RTOS.
+\end{DoxyItemize}
+
+\begin{DoxyAuthor}{Author}
+Lautaro Gómez \href{mailto:lautaro.gomez@ingenieria.uner.edu.ar}{\texttt{lautaro.\+gomez@ingenieria.\+uner.\+edu.\+ar}} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2026 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}

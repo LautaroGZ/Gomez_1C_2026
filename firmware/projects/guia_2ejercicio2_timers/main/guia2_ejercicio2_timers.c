@@ -1,3 +1,30 @@
+/*! @mainpage Guía 2 - Ejercicio 2: Interrupciones y Temporizadores
+ *
+ * @section genDesc General Description
+ * Aplicación de medición de distancia con sensor ultrasónico HC-SR04.
+ * El sistema utiliza un timer de hardware y una tarea FreeRTOS para realizar
+ * mediciones periódicas y actualizar un display LCD.
+ *
+ * @section hardConn Hardware Connection
+ *
+ * |    Peripheral  |   ESP32    |
+ * |:-------------:|:----------:|
+ * | HC-SR04 TRIG  | GPIO_3     |
+ * | HC-SR04 ECHO  | GPIO_2     |
+ * | LCD ITS E0803 | GPIO / I2C |
+ * | SWITCH_1      | Configurado en driver |
+ * | SWITCH_2      | Configurado en driver |
+ *
+ * @section changelog Changelog
+ *
+ * |   Date    | Description |
+ * |:---------:|:------------|
+ * | 29/04/2026 | Documentación Doxygen aplicada |
+ *
+ * @author Lautaro Gómez
+ * lautaro.gomez@ingenieria.uner.edu.ar
+ */
+
 /**
  * @file guia2_ejercicio2_timers.c
  * @brief Sistema de medición de distancia con sensor ultrasónico HC-SR04.
@@ -16,7 +43,7 @@
  * - Uso de interrupciones y notificaciones desde ISR a tarea FreeRTOS.
  *
  * @author Lautaro Gómez
- * @email lautaro.gomez@ingenieria.uner.edu.ar
+ * lautaro.gomez@ingenieria.uner.edu.ar
  * @date 2026
  * @version 1.0
  */

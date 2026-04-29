@@ -1,0 +1,193 @@
+\doxysection{Guía 2 -\/ Ejercicio 2:\+ Temporizadores }
+\hypertarget{group__guia2__ejercicio2__timers}{}\label{group__guia2__ejercicio2__timers}\index{Guía 2 -\/ Ejercicio 2: Temporizadores@{Guía 2 -\/ Ejercicio 2: Temporizadores}}
+
+
+Documentación del proyecto de medición de distancia con temporizador.  
+
+
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group__guia2__ejercicio2__timers_gac1c3a70f8910b90edb3ffb7f9df109c8}{PERIODO\+\_\+\+MEDICION\+\_\+\+US}}~1000000
+\begin{DoxyCompactList}\small\item\em Período de medición en microsegundos Define el intervalo de tiempo (1000000 us = 1 segundo) para el timer de hardware. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{group__guia2__ejercicio2__timers_ga81158e7f39de560c94fe1dd37f1cb5e4}{Tarea\+Medicion}} (void \texorpdfstring{$\ast$}{*}pv\+Parameter)
+\begin{DoxyCompactList}\small\item\em Tarea periódica que realiza la medición de distancia. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__guia2__ejercicio2__timers_gaef14f4c0ac91ce2e9d51fa083985f04e}{Cambiar\+Estado\+Medicion}} (void \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Cambia el estado de la medición. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__guia2__ejercicio2__timers_ga9274a1dbc1c5e992fb6dd6ee30c8696c}{Cambiar\+Estado\+Hold}} (void \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Cambia el estado de HOLD. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__guia2__ejercicio2__timers_gab2b0b81c87cb261c1bf435e9ba889329}{Atender\+Interrupcion\+Timer}} (void \texorpdfstring{$\ast$}{*}param)
+\begin{DoxyCompactList}\small\item\em Maneja la interrupción periódica del timer de hardware. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__guia2__ejercicio2__timers_ga630544a7f0a2cc40d8a7fefab7e2fe70}{app\+\_\+main}} (void)
+\begin{DoxyCompactList}\small\item\em Función principal -\/ Punto de entrada de la aplicación. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+volatile bool \doxymbox{\hyperlink{group__guia2__ejercicio2__timers_gad8b8a0472faf8e23beec6445266e3865}{medir\+\_\+activa}} = true
+\begin{DoxyCompactList}\small\item\em Indica si la medición está activa. \end{DoxyCompactList}\item 
+volatile bool \doxymbox{\hyperlink{group__guia2__ejercicio2__timers_ga0ba8721de317bd3b74c94872c7a40e8c}{hold\+\_\+activo}} = false
+\begin{DoxyCompactList}\small\item\em Indica si la función HOLD está activa. \end{DoxyCompactList}\item 
+uint16\+\_\+t \doxymbox{\hyperlink{group__guia2__ejercicio2__timers_gac6237df249fb5f0e9af9ae2c6bb31e54}{distancia\+\_\+cm}} = 0
+\begin{DoxyCompactList}\small\item\em Última distancia medida en centímetros. \end{DoxyCompactList}\item 
+Task\+Handle\+\_\+t \doxymbox{\hyperlink{group__guia2__ejercicio2__timers_gac49675773e8afdad9d8f3691a8abcf6a}{medicion\+\_\+task\+\_\+handle}} = NULL
+\begin{DoxyCompactList}\small\item\em Handle de la tarea de medición Free\+RTOS. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Documentación del proyecto de medición de distancia con temporizador. 
+
+Este módulo forma parte de la guía de trabajos prácticos y muestra el uso de timers, interrupciones y Free\+RTOS en un sistema de adquisición de distancia. 
+
+\label{doc-define-members}
+\Hypertarget{group__guia2__ejercicio2__timers_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{group__guia2__ejercicio2__timers_gac1c3a70f8910b90edb3ffb7f9df109c8}\index{Guía 2 -\/ Ejercicio 2: Temporizadores@{Guía 2 -\/ Ejercicio 2: Temporizadores}!PERIODO\_MEDICION\_US@{PERIODO\_MEDICION\_US}}
+\index{PERIODO\_MEDICION\_US@{PERIODO\_MEDICION\_US}!Guía 2 -\/ Ejercicio 2: Temporizadores@{Guía 2 -\/ Ejercicio 2: Temporizadores}}
+\doxysubsubsection{\texorpdfstring{PERIODO\_MEDICION\_US}{PERIODO\_MEDICION\_US}}
+{\footnotesize\ttfamily \label{group__guia2__ejercicio2__timers_gac1c3a70f8910b90edb3ffb7f9df109c8} 
+\+\#define PERIODO\+\_\+\+MEDICION\+\_\+\+US~1000000}
+
+
+
+Período de medición en microsegundos Define el intervalo de tiempo (1000000 us = 1 segundo) para el timer de hardware. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{group__guia2__ejercicio2__timers_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group__guia2__ejercicio2__timers_ga630544a7f0a2cc40d8a7fefab7e2fe70}\index{Guía 2 -\/ Ejercicio 2: Temporizadores@{Guía 2 -\/ Ejercicio 2: Temporizadores}!app\_main@{app\_main}}
+\index{app\_main@{app\_main}!Guía 2 -\/ Ejercicio 2: Temporizadores@{Guía 2 -\/ Ejercicio 2: Temporizadores}}
+\doxysubsubsection{\texorpdfstring{app\_main()}{app\_main()}}
+{\footnotesize\ttfamily \label{group__guia2__ejercicio2__timers_ga630544a7f0a2cc40d8a7fefab7e2fe70} 
+void app\+\_\+main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Función principal -\/ Punto de entrada de la aplicación. 
+
+\Hypertarget{group__guia2__ejercicio2__timers_gab2b0b81c87cb261c1bf435e9ba889329}\index{Guía 2 -\/ Ejercicio 2: Temporizadores@{Guía 2 -\/ Ejercicio 2: Temporizadores}!AtenderInterrupcionTimer@{AtenderInterrupcionTimer}}
+\index{AtenderInterrupcionTimer@{AtenderInterrupcionTimer}!Guía 2 -\/ Ejercicio 2: Temporizadores@{Guía 2 -\/ Ejercicio 2: Temporizadores}}
+\doxysubsubsection{\texorpdfstring{AtenderInterrupcionTimer()}{AtenderInterrupcionTimer()}}
+{\footnotesize\ttfamily \label{group__guia2__ejercicio2__timers_gab2b0b81c87cb261c1bf435e9ba889329} 
+void Atender\+Interrupcion\+Timer (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{param}{}\end{DoxyParamCaption})}
+
+
+
+Maneja la interrupción periódica del timer de hardware. 
+
+Función de interrupción del timer de hardware.
+
+Esta ISR notifica a la tarea de medición para que realice una nueva lectura.
+
+
+\begin{DoxyParams}{Parameters}
+{\em param} & Parámetro de la ISR (no usado). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__guia2__ejercicio2__timers_ga9274a1dbc1c5e992fb6dd6ee30c8696c}\index{Guía 2 -\/ Ejercicio 2: Temporizadores@{Guía 2 -\/ Ejercicio 2: Temporizadores}!CambiarEstadoHold@{CambiarEstadoHold}}
+\index{CambiarEstadoHold@{CambiarEstadoHold}!Guía 2 -\/ Ejercicio 2: Temporizadores@{Guía 2 -\/ Ejercicio 2: Temporizadores}}
+\doxysubsubsection{\texorpdfstring{CambiarEstadoHold()}{CambiarEstadoHold()}}
+{\footnotesize\ttfamily \label{group__guia2__ejercicio2__timers_ga9274a1dbc1c5e992fb6dd6ee30c8696c} 
+void Cambiar\+Estado\+Hold (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Cambia el estado de HOLD. 
+
+ISR para SWITCH\+\_\+2 -\/ Activar/\+\+Desactivar HOLD (congelación de lectura).
+
+Esta función se invoca desde la interrupción del pulsador SWITCH\+\_\+2.
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parámetro de callback (no usado). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__guia2__ejercicio2__timers_gaef14f4c0ac91ce2e9d51fa083985f04e}\index{Guía 2 -\/ Ejercicio 2: Temporizadores@{Guía 2 -\/ Ejercicio 2: Temporizadores}!CambiarEstadoMedicion@{CambiarEstadoMedicion}}
+\index{CambiarEstadoMedicion@{CambiarEstadoMedicion}!Guía 2 -\/ Ejercicio 2: Temporizadores@{Guía 2 -\/ Ejercicio 2: Temporizadores}}
+\doxysubsubsection{\texorpdfstring{CambiarEstadoMedicion()}{CambiarEstadoMedicion()}}
+{\footnotesize\ttfamily \label{group__guia2__ejercicio2__timers_gaef14f4c0ac91ce2e9d51fa083985f04e} 
+void Cambiar\+Estado\+Medicion (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Cambia el estado de la medición. 
+
+ISR para SWITCH\+\_\+1 -\/ Activar/\+\+Desactivar medición.
+
+Esta función se invoca desde la interrupción del pulsador SWITCH\+\_\+1.
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parámetro de callback (no usado). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__guia2__ejercicio2__timers_ga81158e7f39de560c94fe1dd37f1cb5e4}\index{Guía 2 -\/ Ejercicio 2: Temporizadores@{Guía 2 -\/ Ejercicio 2: Temporizadores}!TareaMedicion@{TareaMedicion}}
+\index{TareaMedicion@{TareaMedicion}!Guía 2 -\/ Ejercicio 2: Temporizadores@{Guía 2 -\/ Ejercicio 2: Temporizadores}}
+\doxysubsubsection{\texorpdfstring{TareaMedicion()}{TareaMedicion()}}
+{\footnotesize\ttfamily \label{group__guia2__ejercicio2__timers_ga81158e7f39de560c94fe1dd37f1cb5e4} 
+void Tarea\+Medicion (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameter}{}\end{DoxyParamCaption})}
+
+
+
+Tarea periódica que realiza la medición de distancia. 
+
+Tarea Free\+RTOS -\/ Medición de distancia.
+
+La tarea queda bloqueada y se despierta mediante una notificación enviada por la ISR del timer de hardware. Si la medición está habilitada, actualiza el LCD y controla los LEDs de rango.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pv\+Parameter} & Parámetro de creación de la tarea (no usado). \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-var-members}
+\Hypertarget{group__guia2__ejercicio2__timers_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{group__guia2__ejercicio2__timers_gac6237df249fb5f0e9af9ae2c6bb31e54}\index{Guía 2 -\/ Ejercicio 2: Temporizadores@{Guía 2 -\/ Ejercicio 2: Temporizadores}!distancia\_cm@{distancia\_cm}}
+\index{distancia\_cm@{distancia\_cm}!Guía 2 -\/ Ejercicio 2: Temporizadores@{Guía 2 -\/ Ejercicio 2: Temporizadores}}
+\doxysubsubsection{\texorpdfstring{distancia\_cm}{distancia\_cm}}
+{\footnotesize\ttfamily \label{group__guia2__ejercicio2__timers_gac6237df249fb5f0e9af9ae2c6bb31e54} 
+uint16\+\_\+t distancia\+\_\+cm = 0}
+
+
+
+Última distancia medida en centímetros. 
+
+\Hypertarget{group__guia2__ejercicio2__timers_ga0ba8721de317bd3b74c94872c7a40e8c}\index{Guía 2 -\/ Ejercicio 2: Temporizadores@{Guía 2 -\/ Ejercicio 2: Temporizadores}!hold\_activo@{hold\_activo}}
+\index{hold\_activo@{hold\_activo}!Guía 2 -\/ Ejercicio 2: Temporizadores@{Guía 2 -\/ Ejercicio 2: Temporizadores}}
+\doxysubsubsection{\texorpdfstring{hold\_activo}{hold\_activo}}
+{\footnotesize\ttfamily \label{group__guia2__ejercicio2__timers_ga0ba8721de317bd3b74c94872c7a40e8c} 
+volatile bool hold\+\_\+activo = false}
+
+
+
+Indica si la función HOLD está activa. 
+
+Cuando está activo, la lectura en el display LCD no se actualiza. \Hypertarget{group__guia2__ejercicio2__timers_gac49675773e8afdad9d8f3691a8abcf6a}\index{Guía 2 -\/ Ejercicio 2: Temporizadores@{Guía 2 -\/ Ejercicio 2: Temporizadores}!medicion\_task\_handle@{medicion\_task\_handle}}
+\index{medicion\_task\_handle@{medicion\_task\_handle}!Guía 2 -\/ Ejercicio 2: Temporizadores@{Guía 2 -\/ Ejercicio 2: Temporizadores}}
+\doxysubsubsection{\texorpdfstring{medicion\_task\_handle}{medicion\_task\_handle}}
+{\footnotesize\ttfamily \label{group__guia2__ejercicio2__timers_gac49675773e8afdad9d8f3691a8abcf6a} 
+Task\+Handle\+\_\+t medicion\+\_\+task\+\_\+handle = NULL}
+
+
+
+Handle de la tarea de medición Free\+RTOS. 
+
+\Hypertarget{group__guia2__ejercicio2__timers_gad8b8a0472faf8e23beec6445266e3865}\index{Guía 2 -\/ Ejercicio 2: Temporizadores@{Guía 2 -\/ Ejercicio 2: Temporizadores}!medir\_activa@{medir\_activa}}
+\index{medir\_activa@{medir\_activa}!Guía 2 -\/ Ejercicio 2: Temporizadores@{Guía 2 -\/ Ejercicio 2: Temporizadores}}
+\doxysubsubsection{\texorpdfstring{medir\_activa}{medir\_activa}}
+{\footnotesize\ttfamily \label{group__guia2__ejercicio2__timers_gad8b8a0472faf8e23beec6445266e3865} 
+volatile bool medir\+\_\+activa = true}
+
+
+
+Indica si la medición está activa. 
+
+Cuando es verdadero, la tarea de medición lee el sensor y actualiza el LCD. 
