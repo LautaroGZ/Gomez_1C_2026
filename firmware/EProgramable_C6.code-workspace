@@ -41,6 +41,21 @@
         },
         {
             "path": "projects/guia_2ejercicio2_timers"
+        },
+        {
+            "path": "projects/guia2_ejercicio3"
+        },
+        {
+            "path": "projects/guia2_ejercicio4"
+        },
+        {
+            "path": "projects/prueba_acelerometro"
+        },
+        {
+            "path": "projects/bluetooth"
+        },
+        {
+            "path": "projects/Silla_ruedas"
         }
     ],
     "settings": {

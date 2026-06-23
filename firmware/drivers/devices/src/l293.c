@@ -67,8 +67,8 @@ uint8_t L293SetSpeed(l293_motor_t motor, int8_t speed){
 		if(speed < 0){
 			if (speed < MAX_B_SPEED) speed = MAX_B_SPEED;
 			PWMSetDutyCycle(PWM_0, -speed);
-			GPIOOn(A_1);
-			GPIOOff(A_2);
+			GPIOOff(A_1);
+			GPIOOn(A_2);
 		}
 		break;
 	case MOTOR_2:
@@ -86,8 +86,8 @@ uint8_t L293SetSpeed(l293_motor_t motor, int8_t speed){
 		if(speed < 0){
 			if (speed < MAX_B_SPEED) speed = MAX_B_SPEED;
 			PWMSetDutyCycle(PWM_1, -speed);
-			GPIOOn(A_3);
-			GPIOOff(A_4);
+			GPIOOff(A_3);
+			GPIOOn(A_4);
 		}
 		break;
 	default:

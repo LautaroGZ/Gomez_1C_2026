@@ -1,0 +1,271 @@
+\doxysection{Sistema de control de silla de ruedas }
+\hypertarget{group__silla__ruedas}{}\label{group__silla__ruedas}\index{Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group__silla__ruedas_ga5486258f1f34d3baeda92a74b63c27c3}{TASK\+\_\+\+STACK\+\_\+\+SIZE}}~2048
+\begin{DoxyCompactList}\small\item\em Tamaño del stack asignado a cada tarea de Free\+RTOS. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__silla__ruedas_ga82dd0a9ae27bdb2c3cdd33bb7804861c}{TASK\+\_\+\+PRIORITY}}~5
+\begin{DoxyCompactList}\small\item\em Prioridad de ejecución de las tareas. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__silla__ruedas_ga5985b30c29546c6fcdfa5714a6a38017}{DELAY\+\_\+\+MUESTREO\+\_\+\+MS}}~20
+\begin{DoxyCompactList}\small\item\em Período de muestreo y actualización del sistema. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__silla__ruedas_ga3325bb84be30c7b3d5d5a6549e501e0e}{ACCEL\+\_\+\+ALTO\+\_\+\+MAX}}~1800
+\begin{DoxyCompactList}\small\item\em Límites superiores para detectar inclinación en sentido de retroceso. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__silla__ruedas_gaeeec69615ca381f1803235d47905ddb5}{ACCEL\+\_\+\+ALTO\+\_\+\+MIN}}~1700
+\item 
+\+\#define \doxymbox{\hyperlink{group__silla__ruedas_ga4d70c8a56bae8af69a3e84badc5d8ad4}{ACCEL\+\_\+\+BAJO\+\_\+\+MAX}}~1400
+\begin{DoxyCompactList}\small\item\em Límites inferiores para detectar inclinación en sentido de avance. \end{DoxyCompactList}\item 
+\+\#define \doxymbox{\hyperlink{group__silla__ruedas_ga0e2fd99475672c75df37961574980fff}{ACCEL\+\_\+\+BAJO\+\_\+\+MIN}}~1200
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{group__silla__ruedas_ga9c8a13149b47d076fe0c0b7f4265f7a7}{Task\+Accel}} (void \texorpdfstring{$\ast$}{*}pv\+Parameter)
+\begin{DoxyCompactList}\small\item\em Tarea de adquisición y transmisión de datos del acelerómetro. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__silla__ruedas_ga3ced46c3d303a002351b1df4a28e3a2d}{Control\+\_\+\+Motores\+\_\+\+Leds}} (void \texorpdfstring{$\ast$}{*}pv\+Parameter)
+\begin{DoxyCompactList}\small\item\em Tarea de control de motores y señalización mediante LEDs. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__silla__ruedas_ga958d06f26cf88861de0b41ddc59f671f}{leer\+\_\+data\+\_\+bluetooth}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, uint8\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Procesa los comandos recibidos mediante Bluetooth Low Energy. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{group__silla__ruedas_ga630544a7f0a2cc40d8a7fefab7e2fe70}{app\+\_\+main}} (void)
+\begin{DoxyCompactList}\small\item\em Punto de entrada principal de la aplicación. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{group__silla__ruedas_ga4a08607c5899242d8cda38ee405db927}{valor\+\_\+accel}} = 0
+\begin{DoxyCompactList}\small\item\em Última muestra adquirida desde el acelerómetro. \end{DoxyCompactList}\item 
+char \doxymbox{\hyperlink{group__silla__ruedas_ga5aea7431fcbc9344102a585f3fa1e3f0}{uart\+\_\+buffer}} \+[32]\+
+\begin{DoxyCompactList}\small\item\em Buffer utilizado para transmisión UART. \end{DoxyCompactList}\item 
+volatile bool \doxymbox{\hyperlink{group__silla__ruedas_gad4533496a70c48972789e2a7736a029f}{silla\+\_\+habilitada}} = false
+\begin{DoxyCompactList}\small\item\em Estado de habilitación de la silla. \end{DoxyCompactList}\item 
+ble\+\_\+config\+\_\+t \doxymbox{\hyperlink{group__silla__ruedas_gad086e59f2acbeccfa38261f860bbf576}{ble\+\_\+config}}
+\begin{DoxyCompactList}\small\item\em Configuración del servicio Bluetooth Low Energy. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\label{doc-define-members}
+\Hypertarget{group__silla__ruedas_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{group__silla__ruedas_ga3325bb84be30c7b3d5d5a6549e501e0e}\index{Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}!ACCEL\_ALTO\_MAX@{ACCEL\_ALTO\_MAX}}
+\index{ACCEL\_ALTO\_MAX@{ACCEL\_ALTO\_MAX}!Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}}
+\doxysubsubsection{\texorpdfstring{ACCEL\_ALTO\_MAX}{ACCEL\_ALTO\_MAX}}
+{\footnotesize\ttfamily \label{group__silla__ruedas_ga3325bb84be30c7b3d5d5a6549e501e0e} 
+\+\#define ACCEL\+\_\+\+ALTO\+\_\+\+MAX~1800}
+
+
+
+Límites superiores para detectar inclinación en sentido de retroceso. 
+
+\Hypertarget{group__silla__ruedas_gaeeec69615ca381f1803235d47905ddb5}\index{Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}!ACCEL\_ALTO\_MIN@{ACCEL\_ALTO\_MIN}}
+\index{ACCEL\_ALTO\_MIN@{ACCEL\_ALTO\_MIN}!Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}}
+\doxysubsubsection{\texorpdfstring{ACCEL\_ALTO\_MIN}{ACCEL\_ALTO\_MIN}}
+{\footnotesize\ttfamily \label{group__silla__ruedas_gaeeec69615ca381f1803235d47905ddb5} 
+\+\#define ACCEL\+\_\+\+ALTO\+\_\+\+MIN~1700}
+
+\Hypertarget{group__silla__ruedas_ga4d70c8a56bae8af69a3e84badc5d8ad4}\index{Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}!ACCEL\_BAJO\_MAX@{ACCEL\_BAJO\_MAX}}
+\index{ACCEL\_BAJO\_MAX@{ACCEL\_BAJO\_MAX}!Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}}
+\doxysubsubsection{\texorpdfstring{ACCEL\_BAJO\_MAX}{ACCEL\_BAJO\_MAX}}
+{\footnotesize\ttfamily \label{group__silla__ruedas_ga4d70c8a56bae8af69a3e84badc5d8ad4} 
+\+\#define ACCEL\+\_\+\+BAJO\+\_\+\+MAX~1400}
+
+
+
+Límites inferiores para detectar inclinación en sentido de avance. 
+
+\Hypertarget{group__silla__ruedas_ga0e2fd99475672c75df37961574980fff}\index{Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}!ACCEL\_BAJO\_MIN@{ACCEL\_BAJO\_MIN}}
+\index{ACCEL\_BAJO\_MIN@{ACCEL\_BAJO\_MIN}!Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}}
+\doxysubsubsection{\texorpdfstring{ACCEL\_BAJO\_MIN}{ACCEL\_BAJO\_MIN}}
+{\footnotesize\ttfamily \label{group__silla__ruedas_ga0e2fd99475672c75df37961574980fff} 
+\+\#define ACCEL\+\_\+\+BAJO\+\_\+\+MIN~1200}
+
+\Hypertarget{group__silla__ruedas_ga5985b30c29546c6fcdfa5714a6a38017}\index{Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}!DELAY\_MUESTREO\_MS@{DELAY\_MUESTREO\_MS}}
+\index{DELAY\_MUESTREO\_MS@{DELAY\_MUESTREO\_MS}!Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}}
+\doxysubsubsection{\texorpdfstring{DELAY\_MUESTREO\_MS}{DELAY\_MUESTREO\_MS}}
+{\footnotesize\ttfamily \label{group__silla__ruedas_ga5985b30c29546c6fcdfa5714a6a38017} 
+\+\#define DELAY\+\_\+\+MUESTREO\+\_\+\+MS~20}
+
+
+
+Período de muestreo y actualización del sistema. 
+
+Define el tiempo de espera entre iteraciones de las tareas de adquisición y control. \Hypertarget{group__silla__ruedas_ga82dd0a9ae27bdb2c3cdd33bb7804861c}\index{Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}!TASK\_PRIORITY@{TASK\_PRIORITY}}
+\index{TASK\_PRIORITY@{TASK\_PRIORITY}!Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}}
+\doxysubsubsection{\texorpdfstring{TASK\_PRIORITY}{TASK\_PRIORITY}}
+{\footnotesize\ttfamily \label{group__silla__ruedas_ga82dd0a9ae27bdb2c3cdd33bb7804861c} 
+\+\#define TASK\+\_\+\+PRIORITY~5}
+
+
+
+Prioridad de ejecución de las tareas. 
+
+\Hypertarget{group__silla__ruedas_ga5486258f1f34d3baeda92a74b63c27c3}\index{Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}!TASK\_STACK\_SIZE@{TASK\_STACK\_SIZE}}
+\index{TASK\_STACK\_SIZE@{TASK\_STACK\_SIZE}!Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}}
+\doxysubsubsection{\texorpdfstring{TASK\_STACK\_SIZE}{TASK\_STACK\_SIZE}}
+{\footnotesize\ttfamily \label{group__silla__ruedas_ga5486258f1f34d3baeda92a74b63c27c3} 
+\+\#define TASK\+\_\+\+STACK\+\_\+\+SIZE~2048}
+
+
+
+Tamaño del stack asignado a cada tarea de Free\+RTOS. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{group__silla__ruedas_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group__silla__ruedas_ga630544a7f0a2cc40d8a7fefab7e2fe70}\index{Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}!app\_main@{app\_main}}
+\index{app\_main@{app\_main}!Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}}
+\doxysubsubsection{\texorpdfstring{app\_main()}{app\_main()}}
+{\footnotesize\ttfamily \label{group__silla__ruedas_ga630544a7f0a2cc40d8a7fefab7e2fe70} 
+void app\+\_\+main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Punto de entrada principal de la aplicación. 
+
+Inicializa los periféricos necesarios para el funcionamiento del sistema:\+
+
+
+\begin{DoxyItemize}
+\item UART para transmisión de datos.
+\item ADC para adquisición del acelerómetro.
+\item LEDs indicadores.
+\item Driver de motores L293.
+\item Bluetooth Low Energy.
+\end{DoxyItemize}
+
+Posteriormente crea las tareas de Free\+RTOS encargadas de:\+
+\begin{DoxyItemize}
+\item Adquisición de datos.
+\item Control de motores y LEDs.
+\end{DoxyItemize}
+
+Una vez creadas las tareas, el scheduler de Free\+RTOS toma el control de la ejecución. \Hypertarget{group__silla__ruedas_ga3ced46c3d303a002351b1df4a28e3a2d}\index{Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}!Control\_Motores\_Leds@{Control\_Motores\_Leds}}
+\index{Control\_Motores\_Leds@{Control\_Motores\_Leds}!Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}}
+\doxysubsubsection{\texorpdfstring{Control\_Motores\_Leds()}{Control\_Motores\_Leds()}}
+{\footnotesize\ttfamily \label{group__silla__ruedas_ga3ced46c3d303a002351b1df4a28e3a2d} 
+void Control\+\_\+\+Motores\+\_\+\+Leds (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameter}{}\end{DoxyParamCaption})}
+
+
+
+Tarea de control de motores y señalización mediante LEDs. 
+
+Evalúa continuamente el valor adquirido por el acelerómetro y el estado de habilitación recibido por BLE.
+
+Dependiendo del rango de inclinación detectado:\+
+\begin{DoxyItemize}
+\item Retroceso.
+\item Avance.
+\item Detención.
+\end{DoxyItemize}
+
+Además implementa una condición de parada segura cuando la silla se encuentra deshabilitada.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em pv\+Parameter} & Parámetro no utilizado. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__silla__ruedas_ga958d06f26cf88861de0b41ddc59f671f}\index{Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}!leer\_data\_bluetooth@{leer\_data\_bluetooth}}
+\index{leer\_data\_bluetooth@{leer\_data\_bluetooth}!Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}}
+\doxysubsubsection{\texorpdfstring{leer\_data\_bluetooth()}{leer\_data\_bluetooth()}}
+{\footnotesize\ttfamily \label{group__silla__ruedas_ga958d06f26cf88861de0b41ddc59f671f} 
+void leer\+\_\+data\+\_\+bluetooth (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{uint8\+\_\+t}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Procesa los comandos recibidos mediante Bluetooth Low Energy. 
+
+La función es invocada automáticamente por la pila BLE cuando se reciben datos desde una aplicación móvil.
+
+Comandos soportados:\+
+\begin{DoxyItemize}
+\item \textquotesingle{}C\textquotesingle{} :\+ habilita el movimiento de la silla.
+\item \textquotesingle{}c\textquotesingle{} :\+ deshabilita el movimiento de la silla.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em data} & Buffer con los datos recibidos. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em length} & Cantidad de bytes recibidos. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__silla__ruedas_ga9c8a13149b47d076fe0c0b7f4265f7a7}\index{Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}!TaskAccel@{TaskAccel}}
+\index{TaskAccel@{TaskAccel}!Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}}
+\doxysubsubsection{\texorpdfstring{TaskAccel()}{TaskAccel()}}
+{\footnotesize\ttfamily \label{group__silla__ruedas_ga9c8a13149b47d076fe0c0b7f4265f7a7} 
+void Task\+Accel (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameter}{}\end{DoxyParamCaption})}
+
+
+
+Tarea de adquisición y transmisión de datos del acelerómetro. 
+
+Lee periódicamente el canal analógico CH1 conectado al acelerómetro ADXL335 y almacena el resultado en la variable global {\ttfamily \doxylink{group__silla__ruedas_ga4a08607c5899242d8cda38ee405db927}{valor\+\_\+accel}}.
+
+Posteriormente transmite la muestra por UART
+
+Tiempo de ejecución:\+ -\/20 ms.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em pv\+Parameter} & Parámetro no utilizado. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-var-members}
+\Hypertarget{group__silla__ruedas_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{group__silla__ruedas_gad086e59f2acbeccfa38261f860bbf576}\index{Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}!ble\_config@{ble\_config}}
+\index{ble\_config@{ble\_config}!Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}}
+\doxysubsubsection{\texorpdfstring{ble\_config}{ble\_config}}
+{\footnotesize\ttfamily \label{group__silla__ruedas_gad086e59f2acbeccfa38261f860bbf576} 
+ble\+\_\+config\+\_\+t ble\+\_\+config}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}Silla\_Ruedas"{}},}
+\DoxyCodeLine{\ \ \ \ \doxymbox{\hyperlink{group__silla__ruedas_ga958d06f26cf88861de0b41ddc59f671f}{leer\_data\_bluetooth}}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Configuración del servicio Bluetooth Low Energy. 
+
+\Hypertarget{group__silla__ruedas_gad4533496a70c48972789e2a7736a029f}\index{Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}!silla\_habilitada@{silla\_habilitada}}
+\index{silla\_habilitada@{silla\_habilitada}!Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}}
+\doxysubsubsection{\texorpdfstring{silla\_habilitada}{silla\_habilitada}}
+{\footnotesize\ttfamily \label{group__silla__ruedas_gad4533496a70c48972789e2a7736a029f} 
+volatile bool silla\+\_\+habilitada = false}
+
+
+
+Estado de habilitación de la silla. 
+
+Determina si los motores pueden ser accionados.
+
+true -\/\texorpdfstring{$>$}{>} movimiento habilitado. false -\/\texorpdfstring{$>$}{>} movimiento bloqueado. \Hypertarget{group__silla__ruedas_ga5aea7431fcbc9344102a585f3fa1e3f0}\index{Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}!uart\_buffer@{uart\_buffer}}
+\index{uart\_buffer@{uart\_buffer}!Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}}
+\doxysubsubsection{\texorpdfstring{uart\_buffer}{uart\_buffer}}
+{\footnotesize\ttfamily \label{group__silla__ruedas_ga5aea7431fcbc9344102a585f3fa1e3f0} 
+char uart\+\_\+buffer\+[32]\+}
+
+
+
+Buffer utilizado para transmisión UART. 
+
+\Hypertarget{group__silla__ruedas_ga4a08607c5899242d8cda38ee405db927}\index{Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}!valor\_accel@{valor\_accel}}
+\index{valor\_accel@{valor\_accel}!Sistema de control de silla de ruedas@{Sistema de control de silla de ruedas}}
+\doxysubsubsection{\texorpdfstring{valor\_accel}{valor\_accel}}
+{\footnotesize\ttfamily \label{group__silla__ruedas_ga4a08607c5899242d8cda38ee405db927} 
+uint16\+\_\+t valor\+\_\+accel = 0}
+
+
+
+Última muestra adquirida desde el acelerómetro. 
+
+Variable compartida entre la tarea de adquisición y la tarea de control. Contiene el valor digital obtenido mediante el ADC. 

@@ -1,0 +1,10 @@
+var searchData=
+[
+  ['sdkconfig_2eh_0',['sdkconfig.h',['../bootloader_2config_2sdkconfig_8h.html',1,'(Global Namespace)'],['../config_2sdkconfig_8h.html',1,'(Global Namespace)']]],
+  ['silla_20de_20ruedas_1',['Sistema de control de silla de ruedas',['../group__silla__ruedas.html',1,'']]],
+  ['silla_5fhabilitada_2',['silla_habilitada',['../group__silla__ruedas.html#gad4533496a70c48972789e2a7736a029f',1,'silla_ruedas.c']]],
+  ['silla_5fruedas_2ec_3',['silla_ruedas.c',['../silla__ruedas_8c.html',1,'']]],
+  ['sistema_20de_20control_20de_20silla_20de_20ruedas_4',['Sistema de control de silla de ruedas',['../group__silla__ruedas.html',1,'']]],
+  ['stringify_5',['STRINGIFY',['../bootloader_2_c_make_files_23_830_82_2_compiler_id_c_2_c_make_c_compiler_id_8c.html#a43e1cad902b6477bec893cb6430bd6c8',1,'STRINGIFY:&#160;CMakeCCompilerId.c'],['../bootloader_2_c_make_files_23_830_82_2_compiler_id_c_x_x_2_c_make_c_x_x_compiler_id_8cpp.html#a43e1cad902b6477bec893cb6430bd6c8',1,'STRINGIFY:&#160;CMakeCXXCompilerId.cpp'],['../_c_make_files_23_830_82_2_compiler_id_c_2_c_make_c_compiler_id_8c.html#a43e1cad902b6477bec893cb6430bd6c8',1,'STRINGIFY:&#160;CMakeCCompilerId.c'],['../_c_make_files_23_830_82_2_compiler_id_c_x_x_2_c_make_c_x_x_compiler_id_8cpp.html#a43e1cad902b6477bec893cb6430bd6c8',1,'STRINGIFY:&#160;CMakeCXXCompilerId.cpp']]],
+  ['stringify_5fhelper_6',['STRINGIFY_HELPER',['../bootloader_2_c_make_files_23_830_82_2_compiler_id_c_2_c_make_c_compiler_id_8c.html#a2ae9b72bb13abaabfcf2ee0ba7d3fa1d',1,'STRINGIFY_HELPER:&#160;CMakeCCompilerId.c'],['../bootloader_2_c_make_files_23_830_82_2_compiler_id_c_x_x_2_c_make_c_x_x_compiler_id_8cpp.html#a2ae9b72bb13abaabfcf2ee0ba7d3fa1d',1,'STRINGIFY_HELPER:&#160;CMakeCXXCompilerId.cpp'],['../_c_make_files_23_830_82_2_compiler_id_c_2_c_make_c_compiler_id_8c.html#a2ae9b72bb13abaabfcf2ee0ba7d3fa1d',1,'STRINGIFY_HELPER:&#160;CMakeCCompilerId.c'],['../_c_make_files_23_830_82_2_compiler_id_c_x_x_2_c_make_c_x_x_compiler_id_8cpp.html#a2ae9b72bb13abaabfcf2ee0ba7d3fa1d',1,'STRINGIFY_HELPER:&#160;CMakeCXXCompilerId.cpp']]]
+];

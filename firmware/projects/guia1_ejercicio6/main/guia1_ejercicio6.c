@@ -299,11 +299,13 @@ void bcdToGpio(uint8_t bcd, gpioConf_t *vec)
  *
  * @sa convertToBcdArray(), bcdToGpio(), app_main()
  */
-void displayNumber(uint32_t data, uint8_t digits,
+void displayNumber(uint32_t data, uint8_t digits, 
                    gpioConf_t *bcd_pins,
                    gpioConf_t *digit_pins)
 {
     uint8_t bcd_array[digits];
+// acá lo que hago es definir la función displayNumber() que se encarga de mostrar un número en el display de 3 dígitos utilizando multiplexación. La función recibe el número a mostrar, la cantidad de dígitos del display, y los arreglos de configuración de pines para el bus de datos BCD y para la selección de dígitos.
+
 
     // Convierto el número a array de dígitos
     convertToBcdArray(data, digits, bcd_array);
@@ -317,10 +319,10 @@ void displayNumber(uint32_t data, uint8_t digits,
         }
 
         // Envío el valor BCD del dígito actual
-        bcdToGpio(bcd_array[i], bcd_pins);
+        bcdToGpio(bcd_array[i], bcd_pins); // acá lo que hago es llamar a la función bcdToGpio() para enviar el valor del dígito actual (bcd_array[i]) a los pines de datos BCD (bcd_pins). Esto hará que el decodificador BCD muestre el número correspondiente a ese dígito en el display.
 
         // Activo SOLO el dígito correspondiente
-        GPIOState(digit_pins[i].pin, 1);
+        GPIOState(digit_pins[i].pin, 1); //acá lo que hago es activar solamente el dígito actual (digit_pins[i]) estableciendo su estado en 1, mientras que los demás dígitos permanecen apagados (estado 0). Esto es parte de la técnica de multiplexación, donde se enciende un dígito a la vez para mostrar cada parte del número.
 
         // Pequeño delay para que parezca que no se borran
         // Permite que el ojo humano perciba el dígito (persistencia visual)
@@ -388,7 +390,7 @@ void displayNumber(uint32_t data, uint8_t digits,
 void app_main(void)
 {
     /* Pines BCD (datos) */
-    gpioConf_t bcd_pins[4] = {
+    gpioConf_t bcd_pins[4] = {  // acá lo que hago es configurar cada uno de los pines que voy a usar para el bus de datos BCD, y les digo que son GPIO_OUTPUT porque van a ser usados para enviar datos al display bo es lsb y el msb respectivamente. El orden es importante porque luego en bcdToGpio() se asume que vec[0] corresponde al bit 0 (LSB) y vec[3] al bit 3 (MSB).
         {GPIO_20, GPIO_OUTPUT}, // b0
         {GPIO_21, GPIO_OUTPUT}, // b1
         {GPIO_22, GPIO_OUTPUT}, // b2
@@ -396,18 +398,18 @@ void app_main(void)
     };
 
     /* Pines de selección de dígitos */
-    gpioConf_t digit_pins[3] = {
+    gpioConf_t digit_pins[3] = { //acá lo que hago es configurar cada uno de los pines que voy a usar para seleccionar qué dígito del display quiero activar en cada momento, y les digo que son GPIO_OUTPUT porque van a ser usados para enviar señales de control al display para activar o desactivar cada dígito. El orden es importante porque luego en displayNumber() se asume que digit_pins[0] corresponde al dígito 1, digit_pins[1] al dígito 2 y digit_pins[2] al dígito 3.
         {GPIO_19, GPIO_OUTPUT}, // dígito 1
         {GPIO_18, GPIO_OUTPUT}, // dígito 2
         {GPIO_9,  GPIO_OUTPUT}  // dígito 3
     };
 
     // Inicializo todos los GPIOs
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 4; i++) { //acá recorro el arreglo de pines bcd_pins[] e inicializo cada uno de los pines usando GPIOInit() con la configuración especificada en cada elemento del arreglo (número de pin y dirección).
         GPIOInit(bcd_pins[i].pin, bcd_pins[i].dir);
     }
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 3; i++) { //acá recorro el arreglo de pines digit_pins[] e inicializo cada uno de los pines usando GPIOInit() con la configuración especificada en cada elemento del arreglo (número de pin y dirección).
         GPIOInit(digit_pins[i].pin, digit_pins[i].dir);
     }
 
@@ -415,7 +417,7 @@ void app_main(void)
 
     while (1) {
         // Mostrar número continuamente mediante multiplexación
-        displayNumber(numero, 3, bcd_pins, digit_pins);
+        displayNumber(numero, 3, bcd_pins, digit_pins); //aca llamo a la función displayNumber() dentro de un bucle infinito para que el número se muestre continuamente en el display. La función displayNumber() se encarga de realizar la multiplexación y mostrar el número en el display de 3 dígitos utilizando los pines configurados para el bus de datos BCD y los pines de selección de dígito.
     }
 }
 
